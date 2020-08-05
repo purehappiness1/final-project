@@ -35,8 +35,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-const loginSettings = { successRedirect: '/profile', failureRedirect: '/login' };
-const signupSettings = { successRedirect: '/profile', failureRedirect: '/signup' };
+// const loginSettings = { successRedirect: '/profile', failureRedirect: '/login' };
+// const signupSettings = { successRedirect: '/profile', failureRedirect: '/signup' };
 
 passport.use('signup', new LocalStrategy({
   usernameField: 'email',
@@ -88,7 +88,7 @@ function authenticationMiddleware() {
       res.locals.auth = true;
       return next();
     }
-    res.redirect('/home');
+    //res.redirect('/home');
   };
 }
 
