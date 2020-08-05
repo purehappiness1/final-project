@@ -101,9 +101,9 @@ app.get('/', authenticationMiddleware(), function(req, res) {
 });
 
 /* Обработка регистрационных POST-данных */
-app.post('/signup', passport.authenticate('signup', signupSettings));
+app.post('/signup', passport.authenticate('signup' /* , signupSettings */));
 
-app.post('/login', passport.authenticate('local', loginSettings));
+app.post('/login', passport.authenticate('local'/* , loginSettings */));
 
 app.get('/logout', function (req, res) {
   req.logout();
@@ -115,22 +115,6 @@ app.use('/users', usersRouter);
 
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
 
 app.listen(3100, () => {
   console.log('Server started on 3100');

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 /* GET some data */
-router.get('/', async (req, res, next) => {
+router.get('#', async (req, res, next) => {
   const data = Boards.find();
   res.send(data);
 });
