@@ -105,8 +105,6 @@ export default function SignInSide() {
               fullWidth
               id="email"
 
-              label="Email адрес"
-
               type="email"
               value={email.email}
               label="Email адрес"
