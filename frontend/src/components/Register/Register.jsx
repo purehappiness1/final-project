@@ -19,9 +19,9 @@ import Container from '@material-ui/core/Container';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Все права защищены © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Beta CRM
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -120,7 +120,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Зарегистрироваться
         </Typography>
         <form className={classes.form} noValidate
         name="signupForm"
@@ -136,7 +136,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Имя"
                 autoFocus
               />
             </Grid>
@@ -146,9 +146,13 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="lastName"
+
+                
+
                 type="text"
                 value={lastName.lastName}
-                label="Last Name"
+                label="Фамилия"
+
                 name="lastName"
                 autoComplete="lname"
               />
@@ -159,9 +163,13 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
+
+                
+
                 type="email"
                 value={email.email}
-                label="Email Address"
+                label="Email адрес"
+
                 name="email"
                 autoComplete="email"
               />
@@ -172,7 +180,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Пароль"
                 type="password"
                 value={password.password}
                 id="password"
@@ -182,7 +190,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
+                label="Я хочу получать вдохновление, рекламную рассылку по email"
               />
             </Grid>
           </Grid>
@@ -193,12 +201,12 @@ export default function SignUp() {
             color="primary"
             className={classes.submit}
             >
-            Sign Up
+            Зарегистрироваться
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link href="/signin" variant="body2">
+                Уже есть аккаунт? Войти
               </Link>
             </Grid>
           </Grid>

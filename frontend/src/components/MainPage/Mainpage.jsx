@@ -1,13 +1,13 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
+// import Card from '@material-ui/core/Card';
+// import CardActions from '@material-ui/core/CardActions';
+// import CardContent from '@material-ui/core/CardContent';
+// import CardHeader from '@material-ui/core/CardHeader';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import StarIcon from '@material-ui/icons/StarBorder';
+// import Grid from '@material-ui/core/Grid';
+// import StarIcon from '@material-ui/icons/StarBorder';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -18,9 +18,9 @@ import Box from '@material-ui/core/Box';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Все права защищены © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Beta CRM
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -73,58 +73,58 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const tiers = [
-  {
-    title: 'Free',
-    price: '0',
-    description: ['10 users included', '2 GB of storage', 'Help center access', 'Email support'],
-    buttonText: 'Sign up for free',
-    buttonVariant: 'outlined',
-  },
-  {
-    title: 'Pro',
-    subheader: 'Most popular',
-    price: '15',
-    description: [
-      '20 users included',
-      '10 GB of storage',
-      'Help center access',
-      'Priority email support',
-    ],
-    buttonText: 'Get started',
-    buttonVariant: 'contained',
-  },
-  {
-    title: 'Enterprise',
-    price: '30',
-    description: [
-      '50 users included',
-      '30 GB of storage',
-      'Help center access',
-      'Phone & email support',
-    ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
-  },
-];
-const footers = [
-  {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-  },
-  {
-    title: 'Features',
-    description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use'],
-  },
-];
+// const tiers = [
+//   {
+//     title: 'Бесплатно',
+//     price: '0',
+//     description: ['10 пользователей включено', '2 ГБ хранилища', 'Help center access', 'Email support'],
+//     buttonText: 'Sign up for free',
+//     buttonVariant: 'outlined',
+//   },
+//   {
+//     title: 'Про',
+//     subheader: 'Most popular',
+//     price: '15',
+//     description: [
+//       '20 users included',
+//       '10 GB of storage',
+//       'Help center access',
+//       'Priority email support',
+//     ],
+//     buttonText: 'Get started',
+//     buttonVariant: 'contained',
+//   },
+//   {
+//     title: 'Enterprise',
+//     price: '30',
+//     description: [
+//       '50 users included',
+//       '30 GB of storage',
+//       'Help center access',
+//       'Phone & email support',
+//     ],
+//     buttonText: 'Contact us',
+//     buttonVariant: 'outlined',
+//   },
+// ];
+// const footers = [
+//   {
+//     title: 'Company',
+//     description: ['Team', 'History', 'Contact us', 'Locations'],
+//   },
+//   {
+//     title: 'Features',
+//     description: ['Cool stuff', 'Random feature', 'Team feature', 'Developer stuff', 'Another one'],
+//   },
+//   {
+//     title: 'Resources',
+//     description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
+//   },
+//   {
+//     title: 'Legal',
+//     description: ['Privacy policy', 'Terms of use'],
+//   },
+// ];
 
 export default function Pricing() {
   const classes = useStyles();
@@ -135,7 +135,7 @@ export default function Pricing() {
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
-            Company name
+            Beta CRM
           </Typography>
           <Button href="/register" color="primary" variant="outlined" className={classes.link}>Register</Button>
           <Button href="/signin" color="primary" variant="outlined" className={classes.link}>
@@ -146,15 +146,14 @@ export default function Pricing() {
       {/* Hero unit */}
       <Container maxWidth="sm" component="main" className={classes.heroContent}>
         <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-          Pricing
+         Добро пожаловать
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" component="p">
-          Quickly build an effective pricing table for your potential customers with this layout.
-          It&apos;s built with default Material-UI components with little customization.
+          Возможность удобного управления бизнесом со всеми нужными вам инструментами
         </Typography>
       </Container>
       {/* End hero unit */}
-      <Container maxWidth="md" component="main">
+      {/* <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {tiers.map((tier) => (
             // Enterprise card is full width at sm breakpoint
@@ -194,27 +193,9 @@ export default function Pricing() {
             </Grid>
           ))}
         </Grid>
-      </Container>
+      </Container> */}
       {/* Footer */}
       <Container maxWidth="md" component="footer" className={classes.footer}>
-        <Grid container spacing={4} justify="space-evenly">
-          {footers.map((footer) => (
-            <Grid item xs={6} sm={3} key={footer.title}>
-              <Typography variant="h6" color="textPrimary" gutterBottom>
-                {footer.title}
-              </Typography>
-              <ul>
-                {footer.description.map((item) => (
-                  <li key={item}>
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Grid>
-          ))}
-        </Grid>
         <Box mt={5}>
           <Copyright />
         </Box>

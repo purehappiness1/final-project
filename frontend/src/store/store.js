@@ -1,16 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from 'redux-thunk';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {reducers} from './reducers';
+import thunk from 'redux-thunk'
 
-const composeEnhancers = composeWithDevTools(applyMiddleware(thunk))
+const enhancers = compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  ); 
+  const store = createStore(reducers, enhancers); 
 
-const todos = [
-]
+export default store;
 
-const initialState = {
-  todos: todos,
-  isAuth: false
-}
-
-export default createStore(reducer, initialState, composeEnhancers)
