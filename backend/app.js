@@ -86,6 +86,7 @@ passport.use(new LocalStrategy({
   }
 }));
 
+
 function authenticationMiddleware() {
   return function (req, res, next) {
     if (req.isAuthenticated()) {
@@ -104,10 +105,33 @@ app.get('/', authenticationMiddleware(), function (req, res) {
   res.render('index');
 });
 
-/* Обработка регистрационных POST-данных */
-app.post('/signup', passport.authenticate('signup' /* , signupSettings */));
+// app.post('/signup', passport.authenticate('signup' /* , signupSettings */));
 
-app.post('/login', passport.authenticate('local'/* , loginSettings */));
+app.post('/signup', function(req, res, next) {
+  console.log(req.body)
+  passport.authenticate('signup', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.send('failed to signup'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.send('success');
+    });
+  })(req, res, next);
+});
+
+// app.post('/login', passport.authenticate('local'/* , loginSettings */));
+
+app.post('/login', function(req, res, next) {
+  console.log(req.body)
+  passport.authenticate('local', function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.send('failed to login'); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.send('success');
+    });
+  })(req, res, next);
+});
 
 app.get('/logout', function (req, res) {
   req.logout();
