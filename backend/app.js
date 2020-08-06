@@ -9,6 +9,7 @@ const passport = require('passport');
 const passportSession = require('passport-session');
 const LocalStrategy = require('passport-local').Strategy;
 const sha256 = require('sha256');
+const User = require('./models/user');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -20,6 +21,8 @@ mongoose.connect(process.env.CONNECTION, {
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
+
+const cors = require('cors');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +36,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cors())
 
 // const loginSettings = { successRedirect: '/profile', failureRedirect: '/login' };
 // const signupSettings = { successRedirect: '/profile', failureRedirect: '/signup' };
@@ -54,7 +57,8 @@ passport.use('signup', new LocalStrategy({
       return done(null, false);
     }
     const newUser = new User();
-    newUser.name = req.body.name;
+    newUser.firstName = req.body.firstName;
+    newUser.lastName = req.body.lastName;
     newUser.password = sha256(password);
     newUser.email = email;
     await newUser.save();
@@ -93,10 +97,10 @@ function authenticationMiddleware() {
 }
 
 app.get('/profile/:id', authenticationMiddleware(), async (req, res) => {
-//  const currentUser = await User.findById(req.session.passport.user._id).populate('games').lean();
+  //  const currentUser = await User.findById(req.session.passport.user._id).populate('games').lean();
 });
 
-app.get('/', authenticationMiddleware(), function(req, res) {
+app.get('/', authenticationMiddleware(), function (req, res) {
   res.render('index');
 });
 

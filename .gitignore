@@ -1,14 +1,6 @@
-*.env 
-.env* 
-*.local
-
-# dependencies
-node_modules
-.pnp
-.pnp.js
-
-# testing
-frontend/coverage
+*/*.env 
+.env*/*
+*/*.local
 
 # production
 frontend/build
@@ -24,7 +16,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-node_modules/
+*/node_modules/
 .build/
 .idea/
 .vscode/

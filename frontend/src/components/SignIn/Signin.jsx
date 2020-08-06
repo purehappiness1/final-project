@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { sendLogin } from '../../store/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -58,7 +60,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
+  const dispatch = useDispatch();
+  const initState = {email: ''}
+  const initState2 = {password: ''}
+  const [email, setEmail] = useState(initState);
+  const [password, setPassword] = useState(initState2);
   const classes = useStyles();
+
+  const onChangeHandler = (event) => {
+    const {name, value} = event.target;
+    setEmail({[name]: value});
+  };
+
+  const onChangeHandler2 = (event) => {
+    const {name, value} = event.target;
+    setPassword({[name]: value});
+  };
+
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+      if (!email.email) alert("введите email!"); 
+      if (!password.password) alert("введите пароль!"); 
+      setEmail({email: ''});
+      setPassword({password: ''});
+    };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -72,19 +97,25 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Войти
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
+          <form onSubmit={onSubmitHandler} className={classes.form} noValidate>
+            <TextField onChange={onChangeHandler}
               variant="outlined"
               margin="normal"
               required
               fullWidth
               id="email"
+
               label="Email адрес"
+
+              type="email"
+              value={email.email}
+              label="Email адрес"
+
               name="email"
               autoComplete="email"
               autoFocus
             />
-            <TextField
+            <TextField onChange={onChangeHandler2}
               variant="outlined"
               margin="normal"
               required
@@ -92,6 +123,7 @@ export default function SignInSide() {
               name="password"
               label="Пароль"
               type="password"
+              value={password.password}
               id="password"
               autoComplete="current-password"
             />
@@ -105,6 +137,7 @@ export default function SignInSide() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={() => dispatch(sendLogin(email.email, password.password))}
             >
               Войти
             </Button>
