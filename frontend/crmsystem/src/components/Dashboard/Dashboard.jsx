@@ -18,15 +18,19 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Dashboard/listitems';
-import Chart from '../Dashboard/Chart';
-import Deposits from '../Dashboard/Deposits';
-import Orders from '../Dashboard/Orders';
+import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
+// import Chart from '../Dashboard/Chart';
+// import Deposits from '../Dashboard/Deposits';
+// import Orders from '../Dashboard/Orders';
+// import { withStyles } from '@material-ui/core/styles';
+// import { fade } from '@material-ui/core/styles/colorManipulator';
+import Calendar from './Calendar';
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Все права защищены © '}
       <Link color="inherit" href="https://material-ui.com/">
         Your Website
       </Link>{' '}
@@ -126,7 +130,71 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+
+  /* ============================================= */
+  // const currentDate = '2020-08-06';
+  // const schedulerData = [
+  //   { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
+  //   { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
+  // ];
+
+  // const style = theme => ({
+  //   todayCell: {
+  //     backgroundColor: fade(theme.palette.primary.main, 0.1),
+  //     '&:hover': {
+  //       backgroundColor: fade(theme.palette.primary.main, 0.14),
+  //     },
+  //     '&:focus': {
+  //       backgroundColor: fade(theme.palette.primary.main, 0.16),
+  //     },
+  //   },
+  //   weekendCell: {
+  //     backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+  //     '&:hover': {
+  //       backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+  //     },
+  //     '&:focus': {
+  //       backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
+  //     },
+  //   },
+  //   today: {
+  //     backgroundColor: fade(theme.palette.primary.main, 0.16),
+  //   },
+  //   weekend: {
+  //     backgroundColor: fade(theme.palette.action.disabledBackground, 0.06),
+  //   },
+  // });
+
+  // const TimeTableCellBase = ({ classes, ...restProps }) => {
+  //   const { startDate } = restProps;
+  //   const date = new Date(startDate);
+  //   if (date.getDate() === new Date().getDate()) {
+  //     return <WeekView.TimeTableCell {...restProps} className={classes.todayCell} />;
+  //   } if (date.getDay() === 0 || date.getDay() === 6) {
+  //     return <WeekView.TimeTableCell {...restProps} className={classes.weekendCell} />;
+  //   } return <WeekView.TimeTableCell {...restProps} />;
+  // };
+
+  // const TimeTableCell = withStyles(style, { name: 'TimeTableCell' })(TimeTableCellBase);
+
+  // const DayScaleCellBase = ({ classes, ...restProps }) => {
+  //   const { startDate, today } = restProps;
+  //   if (today) {
+  //     return <WeekView.DayScaleCell {...restProps} className={classes.today} />;
+  //   } if (startDate.getDay() === 0 || startDate.getDay() === 6) {
+  //     return <WeekView.DayScaleCell {...restProps} className={classes.weekend} />;
+  //   } return <WeekView.DayScaleCell {...restProps} />;
+  // };
+
+  // const DayScaleCell = withStyles(style, { name: 'DayScaleCell' })(DayScaleCellBase);
+
+
+  // const { data } = appointments; // сделать отрисовку аппоинтментов через useState!
+  // const currentDate = '2018-06-27';
+
+
 
   return (
     <div className={classes.root}>
@@ -143,7 +211,7 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Панель управления
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -167,30 +235,30 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
+        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
+            <Grid item xs={12} md={8} lg={12}>
+              <Paper>
+                <Calendar />
               </Paper>
             </Grid>
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Orders */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
               </Paper>
-            </Grid>
+            </Grid> */}
           </Grid>
           <Box pt={4}>
             <Copyright />

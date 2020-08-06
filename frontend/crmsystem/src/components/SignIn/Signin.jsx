@@ -16,9 +16,9 @@ import { makeStyles } from '@material-ui/core/styles';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {'Все права защищены © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Beta CRM
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -70,7 +70,7 @@ export default function SignInSide() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Войти
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -79,7 +79,7 @@ export default function SignInSide() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email адрес"
               name="email"
               autoComplete="email"
               autoFocus
@@ -90,14 +90,14 @@ export default function SignInSide() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="Пароль"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="Запомнить меня"
             />
             <Button
               type="submit"
@@ -106,17 +106,17 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Войти
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Забыл пароль?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/register" variant="body2">
+                  {"Ещё нет аккаунта? Зарегистрируйся"}
                 </Link>
               </Grid>
             </Grid>
