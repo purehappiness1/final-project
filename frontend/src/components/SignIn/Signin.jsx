@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { sendLogin } from '../../store/actions'
+import { useHistory } from'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -60,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignInSide() {
-  const dispatch = useDispatch();
+  const history = useHistory();
   const initState = {email: ''}
   const initState2 = {password: ''}
   const [email, setEmail] = useState(initState);
@@ -77,13 +76,32 @@ export default function SignInSide() {
     setPassword({[name]: value});
   };
 
-  const onSubmitHandler = (event) => {
+
+  const submitHandler = async (event) => {
     event.preventDefault();
-      if (!email.email) alert("введите email!"); 
-      if (!password.password) alert("введите пароль!"); 
-      setEmail({email: ''});
-      setPassword({password: ''});
-    };
+    const response = await fetch(`http://localhost:3100/login`, {
+      method: 'POST',
+      body: JSON.stringify({
+        email: email.email,
+        password: password.password
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+
+    try {
+      const result = await response.text();
+      console.log(result)
+      if (result === 'success') {
+        return history.push('/dashboard');      
+      } 
+      return window.alert('Введены неверные данные');    
+    } catch (err) {
+      return window.alert('Ошибка входа');    
+    }  
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -97,7 +115,9 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Войти
           </Typography>
-          <form onSubmit={onSubmitHandler} className={classes.form} noValidate>
+          <form className={classes.form} className={classes.form} noValidate
+          name="loginForm"
+          onSubmit={submitHandler}>
             <TextField onChange={onChangeHandler}
               variant="outlined"
               margin="normal"
@@ -136,10 +156,9 @@ export default function SignInSide() {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
-              onClick={() => dispatch(sendLogin(email.email, password.password))}
-            >
+              className={classes.submit}>
               Войти
+
             </Button>
             <Grid container>
               <Grid item xs>

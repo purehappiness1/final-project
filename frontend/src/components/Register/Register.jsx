@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from'react-router-dom';
 import { sendSignup } from '../../store/actions'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
 
-  const dispatch = useDispatch();
+  const history = useHistory();
   const initState = {firstName: ''}
   const initState2 = {lastName: ''}
   const initState3 = {email: ''}
@@ -81,18 +82,36 @@ export default function SignUp() {
     setPassword({[name]: value});
   };
   
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-      if (!firstName.firstName) alert("введите имя!"); 
-      if (!lastName.lastName) alert("введите фамилию!"); 
-      if (!email.email) alert("введите email!"); 
-      if (!password.password) alert("введите пароль!"); 
-      setFirstName({firstName: ''});
-      setLastName({lastName: ''});
-      setEmail({email: ''});
-      setPassword({password: ''});
-    };
     
+  const submitHandler = async (event) => {
+    event.preventDefault();
+    
+    const response = await fetch(`http://localhost:3100/signup`, {
+      method: 'POST',
+      body: JSON.stringify({
+        firstName: firstName.firstName,
+        lastName: lastName.lastName,
+        email: email.email,
+        password: password.password
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+
+    try {
+      const result = await response.text();
+      console.log(result)
+      if (result === 'success') {
+        return history.push('/dashboard');      
+      } 
+      return window.alert('Введены неверные данные');    
+    } catch (err) {
+      return window.alert('Ошибка входа');    
+    }  
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -103,7 +122,9 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Зарегистрироваться
         </Typography>
-        <form onSubmit={onSubmitHandler} className={classes.form} noValidate>
+        <form className={classes.form} noValidate
+        name="signupForm"
+        onSubmit={submitHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField onChange={onChangeHandler}
@@ -179,12 +200,8 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-          
-            
-
-            onClick={() => dispatch(sendSignup(firstName.firstName, lastName.lastName, email.email, password.password))}>
+            >
             Зарегистрироваться
-
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
