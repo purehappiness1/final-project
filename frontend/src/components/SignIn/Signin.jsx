@@ -97,7 +97,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form onSubmit={onSubmitHandler} className={classes.form} className={classes.form} noValidate>
+          <form onSubmit={onSubmitHandler} className={classes.form} noValidate>
             <TextField onChange={onChangeHandler}
               variant="outlined"
               margin="normal"
