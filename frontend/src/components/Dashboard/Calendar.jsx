@@ -1,72 +1,93 @@
-import React, { useState } from 'react';
-import Paper from '@material-ui/core/Paper';
-import { ViewState } from '@devexpress/dx-react-scheduler';
+import React, { useState } from "react";
+import Paper from "@material-ui/core/Paper";
+import {
+  ViewState,
+  EditingState,
+  IntegratedEditing,
+} from "@devexpress/dx-react-scheduler";
 import {
   Scheduler,
   WeekView,
+
+  AllDayPanel,
   MonthView,
   DayView,
   Toolbar,
   DateNavigator,
-  Appointments,
   TodayButton,
-} from '@devexpress/dx-react-scheduler-material-ui';
 
+  Appointments,
+  AppointmentForm,
+  AppointmentTooltip,
+  ConfirmationDialog,
+  DragDropProvider,
+  EditRecurrenceMenu,
+} from "@devexpress/dx-react-scheduler-material-ui";
+
+import { appointments } from "./demo-data/appointments";
 import { ViewSwitcher } from '@devexpress/dx-react-scheduler-material-ui';
 
-import { appointments } from './demo-data/appointments';
-// import Demo from './demo-data/viewSwitching';
+const dragDisableIds = new Set([3, 8, 10, 12]);
+const allowDrag = ({ id }) => !dragDisableIds.has(id);
+const appointmentComponent = (props) => {
+  if (allowDrag(props.data)) {
+    return <Appointments.Appointment {...props} />;
+  } return <Appointments.Appointment {...props} style={{ ...props.style, cursor: 'not-allowed' }} />;
+};
 
-
-export default function Calendar() {
-
-  const [state, setState] = useState([{
+const Calendar = () => {
+  const [state, setState] = useState({
     data: appointments,
-    currentDate: '2018-07-25',
-    currentViewName: 'work-week',
-  }]);
 
-  const currentViewNameChange = (currentViewName) => { setState({ currentViewName }); };
-
-
-  // const { data } = appointments; // сделать отрисовку аппоинтментов через useState!
-  // const currentDate = '2018-06-27';
-  const currentDateChange = (currentDate) => { setState({ currentDate }); };
-  const { data, currentViewName } = state;
+    currentDate: "2018-06-27",
+  });
+  const { data, currentDate } = state;
+  
+  const commitChanges = ({ added, changed, deleted }) => {
+    setState((state) => {
+      let { data } = state;
+      if (added) {
+        const startingAddedId =
+          data.length > 0 ? data[data.length - 1].id + 1 : 0;
+        data = [...data, { id: startingAddedId, ...added }];
+      }
+      if (changed) {
+        data = data.map((appointment) =>
+          changed[appointment.id]
+            ? { ...appointment, ...changed[appointment.id] }
+            : appointment
+        );
+      }
+      if (deleted !== undefined) {
+        data = data.filter((appointment) => appointment.id !== deleted);
+      }
+      return { data };
+    });
+  };
 
   return (
     <Paper>
-      <Scheduler
-        data={data}
-        height={660}
-      >
-        {/* <Demo /> */}
-        <ViewState
-defaultCurrentDate="2018-07-25"
-          currentDate={state.currentDate}
-          currentViewName={currentViewName}
-          onCurrentDateChange={currentDateChange}
-          onCurrentViewNameChange={currentViewNameChange}
-        />
-        <WeekView
-          startDayHour={10}
-          endDayHour={19}
-        />
-        <WeekView
-          name="work-week"
-          displayName="Work Week"
-          excludedDays={[0, 6]}
-          startDayHour={9}
-          endDayHour={19}
-        />
+      <Scheduler data={data} height={660}>
+        <ViewState defaultCurrentDate={currentDate} />
+        <EditingState onCommitChanges={commitChanges} />
+        <EditRecurrenceMenu />
+        <IntegratedEditing />
+        <WeekView startDayHour={9} endDayHour={19} />
         <MonthView />
         <DayView />
+        <ConfirmationDialog />
+        <Appointments appointmentComponent={appointmentComponent} />
+        <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
+        <AppointmentForm />
+
         <Toolbar />
         <ViewSwitcher />
         <DateNavigator />
         <TodayButton />
-        <Appointments />
+        <AllDayPanel />
+        <DragDropProvider allowDrag={allowDrag} />
       </Scheduler>
     </Paper>
   );
-}
+};
+export default Calendar;

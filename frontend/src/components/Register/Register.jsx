@@ -1,30 +1,28 @@
-import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { useHistory } from'react-router-dom';
-import { sendSignup } from '../../store/actions'
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Все права защищены © '}
+      {"Все права защищены © "}
       <Link color="inherit" href="https://material-ui.com/">
         Beta CRM
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -32,16 +30,16 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -50,12 +48,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
-
   const history = useHistory();
-  const initState = {firstName: ''}
-  const initState2 = {lastName: ''}
-  const initState3 = {email: ''}
-  const initState4 = {password: ''}
+  const initState = { firstName: "" };
+  const initState2 = { lastName: "" };
+  const initState3 = { email: "" };
+  const initState4 = { password: "" };
   const [firstName, setFirstName] = useState(initState);
   const [lastName, setLastName] = useState(initState2);
   const [email, setEmail] = useState(initState3);
@@ -63,54 +60,53 @@ export default function SignUp() {
   const classes = useStyles();
 
   const onChangeHandler = (event) => {
-    const {name, value} = event.target;
-    setFirstName({[name]: value});
+    const { name, value } = event.target;
+    setFirstName({ [name]: value });
   };
 
   const onChangeHandler2 = (event) => {
-    const {name, value} = event.target;
-    setLastName({[name]: value});
+    const { name, value } = event.target;
+    setLastName({ [name]: value });
   };
 
   const onChangeHandler3 = (event) => {
-    const {name, value} = event.target;
-    setEmail({[name]: value});
+    const { name, value } = event.target;
+    setEmail({ [name]: value });
   };
 
   const onChangeHandler4 = (event) => {
-    const {name, value} = event.target;
-    setPassword({[name]: value});
+    const { name, value } = event.target;
+    setPassword({ [name]: value });
   };
-  
-    
+
   const submitHandler = async (event) => {
     event.preventDefault();
-    
+
     const response = await fetch(`http://localhost:3100/signup`, {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify({
         firstName: firstName.firstName,
         lastName: lastName.lastName,
         email: email.email,
-        password: password.password
+        password: password.password,
       }),
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
 
     try {
       const result = await response.text();
-      console.log(result)
-      if (result === 'success') {
-        return history.push('/dashboard');      
-      } 
-      return window.alert('Введены неверные данные');    
+      console.log(result);
+      if (result === "success") {
+        return history.push("/dashboard");
+      }
+      return window.alert("Введены неверные данные");
     } catch (err) {
-      return window.alert('Ошибка входа');    
-    }  
-  }
+      return window.alert("Ошибка входа");
+    }
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -122,12 +118,16 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Зарегистрироваться
         </Typography>
-        <form className={classes.form} noValidate
-        name="signupForm"
-        onSubmit={submitHandler}>
+        <form
+          className={classes.form}
+          noValidate
+          name="signupForm"
+          onSubmit={submitHandler}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-              <TextField onChange={onChangeHandler}
+              <TextField
+                onChange={onChangeHandler}
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -141,41 +141,36 @@ export default function SignUp() {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField onChange={onChangeHandler2}
+              <TextField
+                onChange={onChangeHandler2}
                 variant="outlined"
                 required
                 fullWidth
                 id="lastName"
-
-                
-
                 type="text"
                 value={lastName.lastName}
                 label="Фамилия"
-
                 name="lastName"
                 autoComplete="lname"
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField onChange={onChangeHandler3}
+              <TextField
+                onChange={onChangeHandler3}
                 variant="outlined"
                 required
                 fullWidth
                 id="email"
-
-                
-
                 type="email"
                 value={email.email}
                 label="Email адрес"
-
                 name="email"
                 autoComplete="email"
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField onChange={onChangeHandler4}
+              <TextField
+                onChange={onChangeHandler4}
                 variant="outlined"
                 required
                 fullWidth
@@ -200,7 +195,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
-            >
+          >
             Зарегистрироваться
           </Button>
           <Grid container justify="flex-end">
