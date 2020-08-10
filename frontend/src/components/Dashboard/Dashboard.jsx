@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -133,69 +132,7 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  // const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-
-
-  /* ============================================= */
-  // const currentDate = '2020-08-06';
-  // const schedulerData = [
-  //   { startDate: '2018-11-01T09:45', endDate: '2018-11-01T11:00', title: 'Meeting' },
-  //   { startDate: '2018-11-01T12:00', endDate: '2018-11-01T13:30', title: 'Go to a gym' },
-  // ];
-
-  // const style = theme => ({
-  //   todayCell: {
-  //     backgroundColor: fade(theme.palette.primary.main, 0.1),
-  //     '&:hover': {
-  //       backgroundColor: fade(theme.palette.primary.main, 0.14),
-  //     },
-  //     '&:focus': {
-  //       backgroundColor: fade(theme.palette.primary.main, 0.16),
-  //     },
-  //   },
-  //   weekendCell: {
-  //     backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
-  //     '&:hover': {
-  //       backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
-  //     },
-  //     '&:focus': {
-  //       backgroundColor: fade(theme.palette.action.disabledBackground, 0.04),
-  //     },
-  //   },
-  //   today: {
-  //     backgroundColor: fade(theme.palette.primary.main, 0.16),
-  //   },
-  //   weekend: {
-  //     backgroundColor: fade(theme.palette.action.disabledBackground, 0.06),
-  //   },
-  // });
-
-  // const TimeTableCellBase = ({ classes, ...restProps }) => {
-  //   const { startDate } = restProps;
-  //   const date = new Date(startDate);
-  //   if (date.getDate() === new Date().getDate()) {
-  //     return <WeekView.TimeTableCell {...restProps} className={classes.todayCell} />;
-  //   } if (date.getDay() === 0 || date.getDay() === 6) {
-  //     return <WeekView.TimeTableCell {...restProps} className={classes.weekendCell} />;
-  //   } return <WeekView.TimeTableCell {...restProps} />;
-  // };
-
-  // const TimeTableCell = withStyles(style, { name: 'TimeTableCell' })(TimeTableCellBase);
-
-  // const DayScaleCellBase = ({ classes, ...restProps }) => {
-  //   const { startDate, today } = restProps;
-  //   if (today) {
-  //     return <WeekView.DayScaleCell {...restProps} className={classes.today} />;
-  //   } if (startDate.getDay() === 0 || startDate.getDay() === 6) {
-  //     return <WeekView.DayScaleCell {...restProps} className={classes.weekend} />;
-  //   } return <WeekView.DayScaleCell {...restProps} />;
-  // };
-
-  // const DayScaleCell = withStyles(style, { name: 'DayScaleCell' })(DayScaleCellBase);
-
-
-  // const { data } = appointments; // сделать отрисовку аппоинтментов через useState!
-  // const currentDate = '2018-06-27';
+  //
 
 
 
@@ -238,48 +175,23 @@ export default function Dashboard() {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        {/* <List>{secondaryListItems}</List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
+
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-                <Router>
-                  <Switch>
-                    <Route path="/dashboard">
-                      <Calendar />
-                    </Route>
-                    <Route path="/clients">
-                      <Clients />
-                    </Route>
-                    <Route path="/chart">
-                      <Chart />
-                    </Route>
-                  </Switch>
-                </Router>
+                <Calendar />
               </Paper>
             </Grid>
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid> */}
-            {/* Recent Orders */}
-            {/* <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid> */}
           </Grid>
-          <Box pt={4}>
-            <Copyright />
-          </Box>
         </Container>
       </main>
+      {/* <Box pt={4}>
+            <Copyright />
+          </Box> */}
     </div>
   );
 }
