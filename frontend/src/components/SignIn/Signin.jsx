@@ -115,7 +115,7 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Войти
           </Typography>
-          <form className={classes.form} className={classes.form} noValidate
+          <form className={classes.form} noValidate
           name="loginForm"
           onSubmit={submitHandler}>
             <TextField onChange={onChangeHandler}
