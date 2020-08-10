@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -25,6 +26,8 @@ import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems'
 // import { withStyles } from '@material-ui/core/styles';
 // import { fade } from '@material-ui/core/styles/colorManipulator';
 import Calendar from './Calendar';
+import Clients from './Clients';
+import Chart from './Chart';
 
 
 function Copyright() {
@@ -244,7 +247,19 @@ export default function Dashboard() {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-                <Calendar />
+                <Router>
+                  <Switch>
+                    <Route path="/dashboard">
+                      <Calendar />
+                    </Route>
+                    <Route path="/clients">
+                      <Clients />
+                    </Route>
+                    <Route path="/chart">
+                      <Chart />
+                    </Route>
+                  </Switch>
+                </Router>
               </Paper>
             </Grid>
             {/* Recent Deposits */}

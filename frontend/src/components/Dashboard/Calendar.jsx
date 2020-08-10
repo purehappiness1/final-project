@@ -8,12 +8,14 @@ import {
 import {
   Scheduler,
   WeekView,
+
   AllDayPanel,
   MonthView,
   DayView,
   Toolbar,
   DateNavigator,
   TodayButton,
+
   Appointments,
   AppointmentForm,
   AppointmentTooltip,
@@ -36,6 +38,7 @@ const appointmentComponent = (props) => {
 const Calendar = () => {
   const [state, setState] = useState({
     data: appointments,
+
     currentDate: "2018-06-27",
   });
   const { data, currentDate } = state;
@@ -76,6 +79,7 @@ const Calendar = () => {
         <Appointments appointmentComponent={appointmentComponent} />
         <AppointmentTooltip showCloseButton showOpenButton showDeleteButton />
         <AppointmentForm />
+
         <Toolbar />
         <ViewSwitcher />
         <DateNavigator />
