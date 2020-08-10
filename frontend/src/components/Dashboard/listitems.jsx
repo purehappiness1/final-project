@@ -20,23 +20,23 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemLink href="#">
+      <ListItemLink href="/dashboard">
       <ListItemText primary="Календарь" />
       </ListItemLink>
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemLink href="#">
       <ListItemText primary="Заказы" />
       </ListItemLink>
-    </ListItem>
+    </ListItem> */}
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemLink href="#">
+      <ListItemLink href="/clients">
       <ListItemText primary="Клиенты" />
       </ListItemLink>
     </ListItem>
@@ -44,18 +44,18 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemLink href="#">
+      <ListItemLink href="/chart">
       <ListItemText primary="Статистика" />
       </ListItemLink>
     </ListItem>
-    <ListItem button>
+    {/* <ListItem button>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemLink href="#">
       <ListItemText primary="Финансы" />
       </ListItemLink>
-    </ListItem>
+    </ListItem> */}
   </div>
 );
 
