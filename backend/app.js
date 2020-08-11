@@ -122,13 +122,13 @@ app.post('/signup', function(req, res, next) {
 // app.post('/login', passport.authenticate('local'/* , loginSettings */));
 
 app.post('/login', function(req, res, next) {
-  console.log(req.body)
   passport.authenticate('local', function(err, user, info) {
     if (err) { return next(err); }
     if (!user) { return res.send('failed to login'); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.send('success');
+      console.log(user)
+      return res.json(user);
     });
   })(req, res, next);
 });

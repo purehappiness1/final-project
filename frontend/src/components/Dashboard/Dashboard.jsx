@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -19,6 +21,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
+import { logOut } from "../../store/actions";
 // import Chart from '../Dashboard/Chart';
 // import Deposits from '../Dashboard/Deposits';
 // import Orders from '../Dashboard/Orders';
@@ -124,6 +127,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  const dispatch = useDispatch();
+  const firstName = useSelector((state) => (state.firstName));
+  const lastName = useSelector((state) => (state.lastName));
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -133,8 +139,6 @@ export default function Dashboard() {
     setOpen(false);
   };
   //
-
-
 
   return (
     <div className={classes.root}>
@@ -151,13 +155,18 @@ export default function Dashboard() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Панель управления
+            {firstName}&nbsp;{lastName}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          &nbsp;
+          <IconButton color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
+        Logout
+      </IconButton>
+
         </Toolbar>
       </AppBar>
       <Drawer

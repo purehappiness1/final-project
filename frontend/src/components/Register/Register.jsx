@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -13,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { addName } from "../../store/actions";
 
 function Copyright() {
   return (
@@ -49,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const initState = { firstName: "" };
   const initState2 = { lastName: "" };
   const initState3 = { email: "" };
@@ -100,6 +103,7 @@ export default function SignUp() {
       const result = await response.text();
       console.log(result);
       if (result === "success") {
+        dispatch(addName(firstName.firstName, lastName.lastName))
         return history.push("/dashboard");
       }
       return window.alert("Введены неверные данные");
@@ -185,7 +189,7 @@ export default function SignUp() {
             <Grid item xs={12}>
               <FormControlLabel
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="Я хочу получать вдохновление, рекламную рассылку по email"
+                label="Я хочу получать рекламную рассылку по email"
               />
             </Grid>
           </Grid>
