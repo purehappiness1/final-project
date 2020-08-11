@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
@@ -14,43 +13,65 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
-import { useTheme } from '@material-ui/core/styles';
-import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
-import Title from './Title';
+import {
+  Chart,
+  PieSeries,
+  ArgumentAxis,
+  ValueAxis,
+  BarSeries,
+  Legend,
+  Title,
+} from '@devexpress/dx-react-chart-material-ui';
+import { ValueScale } from '@devexpress/dx-react-chart';
 
-function createData(time, amount) {
-  return { time, amount };
-}
+import { withStyles } from '@material-ui/core/styles';
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
+import {
+  schemeSet1,
+} from 'd3-scale-chromatic';
+
+import { Palette } from '@devexpress/dx-react-chart';
+
+const chartData = [
+  { country: 'Подписан договор', area: 67 },
+  { country: 'Переговоры', area: 26 },
+  { country: 'Первичный контакт', area: 12 },
+  { country: 'Принимают решение', area: 7 },
+  { country: 'Согласование договора', area: 11 },
+  { country: 'Назначена встреча', area: 10 },
+  { country: 'Сделка не состоялась', area: 7 },
+  { country: 'Другое', area: 5 },
 ];
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Все права защищены © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const salesData = [
+  { month: 'Январь', sale: 12 },
+  { month: 'Февраль', sale: 16 },
+  { month: 'Март', sale: 10 },
+  { month: 'Апрель', sale: 7 },
+  { month: 'Май', sale: 5 },
+  { month: 'Июнь', sale: 5 },
+  { month: 'Июль', sale: 7 },
+  { month: 'Август', sale: 5 },
+  { month: 'Сентябрь', sale: 0 },
+  { month: 'Октябрь', sale: 0 },
+  { month: 'Ноябрь', sale: 0 },
+  { month: 'Декабрь', sale: 0 },
+];
+
+const styles = {
+  titleText: {
+    textAlign: 'left',
+  },
+};
+
+const TextComponent = withStyles(styles)(({ classes, ...restProps }) => (
+  <Title.Text {...restProps} className={classes.titleText} />
+));
+
 
 const drawerWidth = 240;
 
@@ -133,7 +154,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Chart() {
+export default function Statistics() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -142,9 +163,6 @@ export default function Chart() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  //
-
-
 
   return (
     <div className={classes.root}>
@@ -190,43 +208,41 @@ export default function Chart() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-                <React.Fragment>
-                  <Title>Today</Title>
-                  <ResponsiveContainer>
-                    <LineChart
-                      data={data}
-                      margin={{
-                        top: 16,
-                        right: 16,
-                        bottom: 0,
-                        left: 24,
-                      }}
-                    >
-                      {/* <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
-          <YAxis stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
-            >
-              Sales ($)
-            </Label>
-          </YAxis> */}
-                      {/* <Line type="monotone" dataKey="amount" stroke={theme.palette.primary.main} dot={false} /> */}
-                    </LineChart>
-                  </ResponsiveContainer>
-                </React.Fragment>
+              <Chart
+          data={chartData}>
+          <Palette scheme={schemeSet1} />
+          <PieSeries
+            valueField="area"
+            argumentField="country"
+          />
+          <Title text="Сделки 2020" textComponent={TextComponent} />
+          <Legend />
+        </Chart>
+        <Chart
+        data={salesData}
+        >
+          <ValueScale name="sale" />
+          <ValueScale name="total" />
+
+          <ArgumentAxis />
+          <ValueAxis scaleName="sale" showGrid={false} showLine showTicks />
+          <ValueAxis scaleName="total" position="right" showGrid={false} showLine showTicks />
+          <BarSeries
+            valueField="sale"
+            argumentField="month"
+            scaleName="sale"
+          />
+          <Title text="Продажи 2020" textComponent={TextComponent} />
+          
+          </Chart>
               </Paper>
             </Grid>
           </Grid>
         </Container>
       </main>
-      {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
+      
     </div>
   );
 }
