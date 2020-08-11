@@ -32,6 +32,8 @@ import Clients from './Clients';
 import Chart from './Chart';
 
 
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -163,9 +165,9 @@ export default function Dashboard() {
             </Badge>
           </IconButton>
           &nbsp;
-          <IconButton color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
+          <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
         Logout
-      </IconButton>
+      </Link>
 
         </Toolbar>
       </AppBar>
