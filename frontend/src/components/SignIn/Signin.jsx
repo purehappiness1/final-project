@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,6 +14,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import { addName } from "../../store/actions";
 
 function Copyright() {
   return (
@@ -60,6 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignInSide() {
   const history = useHistory();
+  const dispatch = useDispatch();
   const initState = {email: ''}
   const initState2 = {password: ''}
   const [email, setEmail] = useState(initState);
@@ -92,9 +95,10 @@ export default function SignInSide() {
     })
 
     try {
-      const result = await response.text();
+      const result = await response.json();
       console.log(result)
-      if (result === 'success') {
+      if (result) {
+        dispatch(addName(result.firstName, result.lastName))
         return history.push('/dashboard');      
       } 
       return window.alert('Введены неверные данные');    
