@@ -2,6 +2,8 @@ import React from 'react';
 import clsx from 'clsx';
 import Title from './Title';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 // import Box from '@material-ui/core/Box';
@@ -21,6 +23,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
 import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
+import { logOut } from "../../store/actions";
 
 function Copyright() {
   return (
@@ -117,6 +120,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Clients() {
+  const dispatch = useDispatch();
+  const firstName = useSelector((state) => (state.firstName));
+  const lastName = useSelector((state) => (state.lastName));
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -143,13 +149,17 @@ export default function Clients() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Панель управления
+          {firstName}&nbsp;{lastName}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          &nbsp;
+          <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
+        Logout
+      </Link>
         </Toolbar>
       </AppBar>
       <Drawer

@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignInSide from './components/SignIn/Signin';
 import Register from './components/Register/Register';
@@ -8,14 +9,26 @@ import Clients from './components/Dashboard/Clients';
 import Chart from './components/Dashboard/Chart'
 
 function App() {
+
+  function PrivateRoute({child}) {
+    const isAuth = useSelector((state) => state.isAuth);
+
+    return (
+      <Route
+        render={() =>
+          isAuth
+            ? (child) //в children (зарезервырованная переменная компонента) прилетает компонент Private и рендериться если isAuth - true
+            : (<Redirect to={{ pathname: '/homepage' }} />) //иначе редирект на /home
+        }
+      />
+    );
+  }
   return (
     <div className="App">
 
       <Router>
         <Switch>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
+          
           <Route path="/homepage">
             <Mainpage />
           </Route>
@@ -26,12 +39,32 @@ function App() {
           <Route path="/signin">
             <SignInSide />
           </Route>
-          <Route path="/clients">
+          <PrivateRoute path='/dashboard' child={<Dashboard/>}>
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute path='/clients' child={<Clients />}
+          // isAuth={true} 
+          >
+            <Clients />
+          </PrivateRoute>
+          <PrivateRoute path='/chart' child={<Chart />}
+          // isAuth={true} 
+          >
+            <Chart />
+          </PrivateRoute>
+          {/* <Route path='/dashboard' child={<Dashboard/>}>
+            <Dashboard />
+          </Route>
+          <Route path='/clients' child={<Clients />}
+          // isAuth={true} 
+          >
             <Clients />
           </Route>
-          <Route path="/chart">
+          <Route path='/chart' child={<Chart />}
+          // isAuth={true} 
+          >
             <Chart />
-          </Route>
+          </Route> */}
         </Switch>
       </Router>
     </div>

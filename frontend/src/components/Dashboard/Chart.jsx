@@ -1,6 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -26,6 +29,7 @@ import {
   Legend,
   Title,
 } from '@devexpress/dx-react-chart-material-ui';
+import { logOut } from "../../store/actions";
 import { ValueScale } from '@devexpress/dx-react-chart';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -155,6 +159,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Statistics() {
+  const dispatch = useDispatch();
+  const firstName = useSelector((state) => (state.firstName));
+  const lastName = useSelector((state) => (state.lastName));
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -179,13 +186,17 @@ export default function Statistics() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Панель управления
+          {firstName}&nbsp;{lastName}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
+          &nbsp;
+          <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
+        Logout
+      </Link>
         </Toolbar>
       </AppBar>
       <Drawer
