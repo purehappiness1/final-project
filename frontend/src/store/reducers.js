@@ -14,6 +14,16 @@ const initData = {
   firstName: '',
   lastName: '',
   isAuth: false,
+  chartData: [
+    { status: 'Подписан договор', total: 67 },
+    { status: 'Переговоры', total: 26 },
+    { status: 'Первичный контакт', total: 12 },
+    { status: 'Принимают решение', total: 7 },
+    { status: 'Согласование договора', total: 11 },
+    { status: 'Назначена встреча', total: 10 },
+    { status: 'Сделка не состоялась', total: 7 },
+    { status: 'Другое', total: 5 },
+  ],
 }
 
 export const reducers = (state = initData, action) => {
@@ -31,6 +41,14 @@ export const reducers = (state = initData, action) => {
 
     case actions.LOGOUT:
       return { state, isAuth: false };
+    
+      case actions.ADD_DEAL: 
+      const deals = state.chartData.map((deal) => {
+      if (deal.status === action.status) {
+      deal.total += 1 }
+      return deal
+      })
+      return { ...state, chartData: deals}
 
     default:
       return state;

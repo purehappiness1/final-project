@@ -11,3 +11,5 @@ export const addTask = (task) => async (dispatch) => {
 export const addName = (firstName, lastName) => ({ type: actions.ADD_NAME,  firstName, lastName });
 
 export const logOut = () => ({ type: actions.LOGOUT })
+
+export const addDeal = (client, status) => ({ type: actions.ADD_DEAL, client, status})
