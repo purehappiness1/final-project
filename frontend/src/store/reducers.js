@@ -1,5 +1,6 @@
 
 import actions from "./types";
+import { appointments } from "../components/Dashboard/demo-data/appointments";
 
 const initData = {
   todos: {
@@ -24,6 +25,7 @@ const initData = {
     { status: 'Сделка не состоялась', total: 7 },
     { status: 'Другое', total: 5 },
   ],
+  appointments: appointments,
 }
 
 export const reducers = (state = initData, action) => {

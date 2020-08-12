@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import Paper from "@material-ui/core/Paper";
 import {
   ViewState,
@@ -8,14 +9,12 @@ import {
 import {
   Scheduler,
   WeekView,
-
   AllDayPanel,
   MonthView,
   DayView,
   Toolbar,
   DateNavigator,
   TodayButton,
-
   Appointments,
   AppointmentForm,
   AppointmentTooltip,
@@ -36,13 +35,12 @@ const appointmentComponent = (props) => {
 };
 
 const Calendar = () => {
+  
   const [state, setState] = useState({
     data: appointments,
-
     currentDate: "2020-08-14",
   });
   const { data, currentDate } = state;
-  
   const commitChanges = ({ added, changed, deleted }) => {
     setState((state) => {
       let { data } = state;
