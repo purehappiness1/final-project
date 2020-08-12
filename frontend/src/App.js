@@ -7,6 +7,7 @@ import Register from './components/Register/Register';
 import Mainpage from './components/MainPage/Mainpage';
 import Clients from './components/Dashboard/Clients';
 import Chart from './components/Dashboard/Chart'
+import Todos from './components/Dashboard/Todos'
 
 function App() {
 
@@ -43,28 +44,17 @@ function App() {
             <Dashboard />
           </PrivateRoute>
           <PrivateRoute path='/clients' child={<Clients />}
-          // isAuth={true} 
           >
             <Clients />
           </PrivateRoute>
           <PrivateRoute path='/chart' child={<Chart />}
-          // isAuth={true} 
           >
             <Chart />
           </PrivateRoute>
-          {/* <Route path='/dashboard' child={<Dashboard/>}>
-            <Dashboard />
-          </Route>
-          <Route path='/clients' child={<Clients />}
-          // isAuth={true} 
+          <PrivateRoute path='/todos' child={<Todos />}
           >
-            <Clients />
-          </Route>
-          <Route path='/chart' child={<Chart />}
-          // isAuth={true} 
-          >
-            <Chart />
-          </Route> */}
+            <Todos />
+          </PrivateRoute>
         </Switch>
       </Router>
     </div>
