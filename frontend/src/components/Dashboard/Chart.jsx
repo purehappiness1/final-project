@@ -20,6 +20,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
+import { addDeal } from "../../store/actions";
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import {
   Chart,
   PieSeries,
@@ -40,16 +47,7 @@ import {
 
 import { Palette } from '@devexpress/dx-react-chart';
 
-const chartData = [
-  { country: 'Подписан договор', area: 67 },
-  { country: 'Переговоры', area: 26 },
-  { country: 'Первичный контакт', area: 12 },
-  { country: 'Принимают решение', area: 7 },
-  { country: 'Согласование договора', area: 11 },
-  { country: 'Назначена встреча', area: 10 },
-  { country: 'Сделка не состоялась', area: 7 },
-  { country: 'Другое', area: 5 },
-];
+
 
 const salesData = [
   { month: 'Январь', sale: 12 },
@@ -66,10 +64,11 @@ const salesData = [
   { month: 'Декабрь', sale: 0 },
 ];
 
+
 const styles = {
   titleText: {
     textAlign: 'left',
-  },
+  }
 };
 
 const TextComponent = withStyles(styles)(({ classes, ...restProps }) => (
@@ -85,6 +84,12 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+  },
+  someColor: {
+    height: '300px'
+    // backgroundColor: 'green',
+    // opacity: '1',
+    // position: 'absolute'
   },
   toolbarIcon: {
     display: 'flex',
@@ -162,6 +167,23 @@ export default function Statistics() {
   const dispatch = useDispatch();
   const firstName = useSelector((state) => (state.firstName));
   const lastName = useSelector((state) => (state.lastName));
+  const chartData = useSelector((state) => (state.chartData));
+  const [openForm, setOpenForm] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenForm(true);
+  };
+
+  const handleClose = () => {
+    setOpenForm(false);
+  };
+
+  const handleSave = () => {
+    dispatch(addDeal(client.client, status.status))
+    setClient(initState);
+    setStatus(initState2)
+    setOpenForm(false);
+    // сохранение новой сделки в state
+  }
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
@@ -169,6 +191,21 @@ export default function Statistics() {
   };
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const initState = { client: '' }
+  const initState2 = { status: '' }
+  const [client, setClient] = React.useState(initState);
+  const [status, setStatus] = React.useState(initState2);
+
+  const onChangeHandler = (event) => {
+    const { name, value } = event.target;
+    setClient({ [name]: value });
+  };
+
+  const onChangeHandler2 = (event) => {
+    const { name, value } = event.target;
+    setStatus({ [name]: value });
   };
 
   return (
@@ -186,7 +223,7 @@ export default function Statistics() {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-          {firstName}&nbsp;{lastName}
+            {firstName}&nbsp;{lastName}
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -195,7 +232,7 @@ export default function Statistics() {
           </IconButton>
           &nbsp;
           <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
-        Logout
+            Logout
       </Link>
         </Toolbar>
       </AppBar>
@@ -221,39 +258,85 @@ export default function Statistics() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-              <Chart
-          data={chartData}>
-          <Palette scheme={schemeSet1} />
-          <PieSeries
-            valueField="area"
-            argumentField="country"
-          />
-          <Title text="Сделки 2020" textComponent={TextComponent} />
-          <Legend />
-        </Chart>
-        <Chart
-        data={salesData}
-        >
-          <ValueScale name="sale" />
-          <ValueScale name="total" />
+                <Chart
+                  data={chartData}>
+                  <Palette scheme={schemeSet1} />
+                  <PieSeries
+                    valueField="total"
+                    argumentField="status"
+                  />
+                  <Title text="Сделки 2020" textComponent={TextComponent} />
+                  <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+                    Создать
+      </Button>
+                  <Dialog open={openForm} onClose={handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Новая сделка</DialogTitle>
+                    <DialogContent>
+                      <form className={classes.form} noValidate
+                        name="loginForm">
+                        <TextField onChange={onChangeHandler}
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          id="client"
 
-          <ArgumentAxis />
-          <ValueAxis scaleName="sale" showGrid={false} showLine showTicks />
-          <ValueAxis scaleName="total" position="right" showGrid={false} showLine showTicks />
-          <BarSeries
-            valueField="sale"
-            argumentField="month"
-            scaleName="sale"
-          />
-          <Title text="Продажи 2020" textComponent={TextComponent} />
-          
-          </Chart>
+                          type="text"
+                          value={client.client}
+                          label="Имя клиента"
+
+                          name="client"
+
+                          autoFocus
+                        />
+                        <TextField onChange={onChangeHandler2}
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          name="status"
+                          label="Статус сделки"
+                          type="text"
+                          value={status.status}
+                          id="password"
+                          autoComplete="current-password"
+                        />
+                      </form>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="primary">
+                        Cancel
+          </Button>
+                      <Button onClick={handleSave} color="primary">
+                        Subscribe
+          </Button>
+                    </DialogActions>
+                  </Dialog>
+                  <Legend />
+                </Chart>
+                <Chart
+                  data={salesData}
+                >
+                  <ValueScale name="sale" />
+                  <ValueScale name="total" />
+
+                  <ArgumentAxis />
+                  <ValueAxis scaleName="sale" showGrid={false} showLine showTicks />
+                  <ValueAxis scaleName="total" position="right" showGrid={false} showLine showTicks />
+                  <BarSeries
+                    valueField="sale"
+                    argumentField="month"
+                    scaleName="sale"
+                  />
+                  <Title text="Продажи 2020" textComponent={TextComponent} />
+
+                </Chart>
               </Paper>
             </Grid>
           </Grid>
         </Container>
       </main>
-      
+
     </div>
   );
 }

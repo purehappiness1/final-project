@@ -17,8 +17,8 @@ function App() {
       <Route
         render={() =>
           isAuth
-            ? (child) //в children (зарезервырованная переменная компонента) прилетает компонент Private и рендериться если isAuth - true
-            : (<Redirect to={{ pathname: '/homepage' }} />) //иначе редирект на /home
+            ? (child) 
+            : (<Redirect to={{ pathname: '/homepage' }} />) 
         }
       />
     );
