@@ -49,7 +49,16 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Статистика" />
     </ListItem>
-
+    <ListItem
+      button
+      key="Dashboard"
+      component={NavLink} to="/todos"
+    >
+      <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <ListItemText primary="Заметки" />
+    </ListItem>
   </div>
 );
 
