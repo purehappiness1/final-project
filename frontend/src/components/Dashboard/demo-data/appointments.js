@@ -26,7 +26,7 @@ export const appointments = [
   }, {
     title: 'Final Budget Review',
     startDate: new Date(2020, 7, 12, 10, 0),
-    endDate: new Date(2020, 7, 12, 13, 35),
+    endDate: new Date(2020, 7, 12, 18, 35),
     id: 4,
     location: 'Room 2',
   }, {

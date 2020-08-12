@@ -7,6 +7,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
+import Popover from '@material-ui/core/Popover';
+import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
@@ -129,6 +131,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Dashboard() {
+  const appointments = useSelector((state) => (state.appointments));
+  const date = new Date()
+  const current = appointments.filter((item) => item.startDate < date && item.endDate > date)
+  const arr = [];
+  current.forEach((item) => arr.push(item.title))
+  const title = arr.join(', ')
   const dispatch = useDispatch();
   const firstName = useSelector((state) => (state.firstName));
   const lastName = useSelector((state) => (state.lastName));
@@ -141,6 +149,19 @@ export default function Dashboard() {
     setOpen(false);
   };
   //
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openIcon = Boolean(anchorEl);
+  const id = openIcon ? 'simple-popover' : undefined;
 
   return (
     <div className={classes.root}>
@@ -160,13 +181,29 @@ export default function Dashboard() {
             {firstName}&nbsp;{lastName}
           </Typography>
           <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={current.length} color="secondary" onClick={handleClick}>
               <NotificationsIcon />
             </Badge>
+            <Popover
+              id={id}
+              open={openIcon}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+            >
+              <Typography className={classes.typography}>{title}</Typography>
+            </Popover>
           </IconButton>
           &nbsp;
           <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
-        Logout
+            Logout
       </Link>
 
         </Toolbar>

@@ -305,10 +305,10 @@ export default function Statistics() {
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={handleClose} color="primary">
-                        Cancel
+                        отмена
           </Button>
                       <Button onClick={handleSave} color="primary">
-                        Subscribe
+                        сохранить
           </Button>
                     </DialogActions>
                   </Dialog>
