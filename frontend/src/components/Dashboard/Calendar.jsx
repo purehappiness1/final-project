@@ -39,7 +39,7 @@ const Calendar = () => {
   const [state, setState] = useState({
     data: appointments,
 
-    currentDate: "2018-06-27",
+    currentDate: "2020-08-14",
   });
   const { data, currentDate } = state;
   
