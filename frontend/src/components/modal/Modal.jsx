@@ -20,7 +20,6 @@ const Modal = () => {
   };
 
   const submitHandler = () => {
-    console.log("inputValue", inputValue);
     dispatch(addTask(inputValue));
   };
 
@@ -44,28 +43,13 @@ const Modal = () => {
             color="primary" variant="contained" style={styles3.btn}
               onClick={() => {
                 submitHandler();
-                setState({ isOpen: false });
-              }}
-            >
-              Добавить(закрыть окно)
-            </Button>
+                setState({ isOpen: false });}}>Добавить(закрыть окно)</Button>
           </div>
         </div>
       )}
     </React.Fragment>
   );
 };
-
-// const initialFormState = {title: '',name: '',phone: '',description: ''};
-// const { title, name, phone,description } = state;
-
-// <form>
-//   <input placeholder="Заголовок" onChange={onChangeHandler} name="inputValue" value={state.title} /><br/>
-//   <input placeholder="ФИО" onChange={onChangeHandler} name="inputValue" value={state.name} /><br/>
-//   <input placeholder="Телефон" onChange={onChangeHandler} name="inputValue" value={state.phone} /><br/>
-//   <textarea placeholder="Краткое описание" onChange={onChangeHandler} name="inputValue" value={state.description} /><br/>
-//   <button onClick = {()=>{submitHandler(); setState({ isOpen: false }) }} >Добавить(закрыть окно)</button>
-// </form>
 
 const styles = {
   modal: {
