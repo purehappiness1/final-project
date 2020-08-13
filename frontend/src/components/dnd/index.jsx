@@ -13,7 +13,7 @@ class DragModel extends React.Component {
   state = initData;
 
   onDragStart = () => {
-    document.body.style.color = "orange";
+    document.body.style.color = "#c8d5b9";
     document.body.style.transition = "background-color 0.2s ease";
   };
 
@@ -22,7 +22,7 @@ class DragModel extends React.Component {
     const opacity = destination
       ? destination.index / Object.keys(this.state.tasks).length
       : 0;
-    document.body.style.backgroundColor = `rgba(153, 141, 217, ${opacity})`;
+    document.body.style.backgroundColor = `rgba(53, 141, 317, ${opacity})`;
   };
 
   onDragEnd = (result) => {
