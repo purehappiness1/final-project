@@ -27,6 +27,20 @@ import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems'
 import '@devexpress/dx-react-chart-bootstrap4/dist/dx-react-chart-bootstrap4.css';
 import { logOut } from "../../store/actions";
 import DataClients from './demo-data/showSlients'
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#64b5f6',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -155,6 +169,7 @@ export default function Clients() {
   const id = openIcon ? 'simple-popover' : undefined;
 
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
@@ -242,5 +257,6 @@ export default function Clients() {
         </Container>
       </main>
     </div>
+    </ThemeProvider>
   );
 }

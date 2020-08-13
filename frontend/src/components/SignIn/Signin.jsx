@@ -15,6 +15,20 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { addName } from "../../store/actions";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#64b5f6',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -34,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    // backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: 'url(https://images.unsplash.com/photo-1595496115800-e35438b7d3b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max)',
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -108,6 +123,7 @@ export default function SignInSide() {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -165,12 +181,12 @@ export default function SignInSide() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Забыл пароль?
+                  Забыли пароль?
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="/register" variant="body2">
-                  {"Ещё нет аккаунта? Зарегистрируйся"}
+                  {"Ещё нет аккаунта? Зарегистрируйтесь"}
                 </Link>
               </Grid>
             </Grid>
@@ -181,5 +197,6 @@ export default function SignInSide() {
         </div>
       </Grid>
     </Grid>
+    </ThemeProvider>
   );
 }

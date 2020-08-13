@@ -24,17 +24,23 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems /*, secondaryListItems */ } from '../Dashboard/listitems';
 import { logOut } from "../../store/actions";
-// import Chart from '../Dashboard/Chart';
-// import Deposits from '../Dashboard/Deposits';
-// import Orders from '../Dashboard/Orders';
-// import { withStyles } from '@material-ui/core/styles';
-// import { fade } from '@material-ui/core/styles/colorManipulator';
 import Calendar from './Calendar';
 import Clients from './Clients';
 import Chart from './Chart';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
 
-
-
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#64b5f6',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -57,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
+    backgroundColor: 'palette.info.light'
   },
   toolbarIcon: {
     display: 'flex',
@@ -164,10 +171,16 @@ export default function Dashboard() {
   const id = openIcon ? 'simple-popover' : undefined;
 
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
+      
+     
+    
+        <Toolbar color="primary" 
+        // className={classes.toolbar}
+        >
           <IconButton
             edge="start"
             color="inherit"
@@ -207,6 +220,7 @@ export default function Dashboard() {
       </Link>
 
         </Toolbar>
+        
       </AppBar>
       <Drawer
         variant="permanent"
@@ -237,9 +251,8 @@ export default function Dashboard() {
           </Grid>
         </Container>
       </main>
-      {/* <Box pt={4}>
-            <Copyright />
-          </Box> */}
+    
     </div>
+    </ThemeProvider>
   );
 }
