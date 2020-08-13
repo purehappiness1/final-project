@@ -44,7 +44,16 @@ import { schemeSet1 } from 'd3-scale-chromatic';
 import { Palette } from '@devexpress/dx-react-chart';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import { info } from '@material-ui/core/colors';
+import {Pie} from 'react-chartjs-2';
+
+import { defaults } from 'react-chartjs-2';
+
+// Disable animating charts by default.
+// defaults.global.animation.duration = 5000;
+
+// window.onload=function(){
+//   setTimeout(() => Statistics(), 2000);
+// };
 
 const theme = createMuiTheme({
   palette: {
@@ -57,6 +66,7 @@ const theme = createMuiTheme({
   },
 });
 
+// setTimeout(() => Statistics(), 1000);
 
 const salesData = [
   { month: 'Январь', sale: 12 },
@@ -303,14 +313,14 @@ export default function Statistics() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-                <Chart
+                {/* <Chart
                   data={chartData}>
                   <Palette scheme={schemeSet1} />
                   <PieSeries
                     valueField="total"
                     argumentField="status"
                   />
-                  <Title text="Сделки 2020" textComponent={TextComponent} />
+                <Title text="Сделки 2020" textComponent={TextComponent} />*/}
                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                     Создать
       </Button>
@@ -357,9 +367,11 @@ export default function Statistics() {
           </Button>
                     </DialogActions>
                   </Dialog>
-                  <Legend />
-                </Chart>
-                <Chart
+                  {/* <Legend />
+                </Chart> */} 
+                <Pie data={chartData} />
+                
+                {/* <Chart
                   data={salesData}
                 >
                   <ValueScale name="sale" />
@@ -375,7 +387,7 @@ export default function Statistics() {
                   />
                   <Title text="Продажи 2020" textComponent={TextComponent} />
 
-                </Chart>
+                </Chart> */}
               </Paper>
             </Grid>
           </Grid>

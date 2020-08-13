@@ -28,6 +28,7 @@ import { schemeSet1 } from 'd3-scale-chromatic';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { info } from '@material-ui/core/colors';
+import DragModel from '../dnd/index'
 
 const theme = createMuiTheme({
   palette: {
@@ -40,7 +41,7 @@ const theme = createMuiTheme({
   },
 });
 
-import DragModel from '../dnd/index'
+
 
 const styles = {
   titleText: {
