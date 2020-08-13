@@ -50,6 +50,7 @@ function App() {
           <PrivateRoute path='/chart' child={<Chart />}
           >
             <Chart />
+            
           </PrivateRoute>
           <PrivateRoute path='/todos' child={<Todos />}
           >

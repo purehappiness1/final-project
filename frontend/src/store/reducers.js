@@ -15,16 +15,41 @@ const initData = {
   firstName: '',
   lastName: '',
   isAuth: false,
-  chartData: [
-    { status: 'Подписан договор', total: 67 },
-    { status: 'Переговоры', total: 26 },
-    { status: 'Первичный контакт', total: 12 },
-    { status: 'Принимают решение', total: 7 },
-    { status: 'Согласование договора', total: 11 },
-    { status: 'Назначена встреча', total: 10 },
-    { status: 'Сделка не состоялась', total: 7 },
-    { status: 'Другое', total: 5 },
-  ],
+  chartData: {
+    labels: [
+      'Подписан договор',
+      'Переговоры',
+      'Первичный контакт',
+      'Принимают решение',
+      'Согласование договора',
+      'Назначена встреча',
+      'Сделка не состоялась',
+      'Другое'
+    ],
+    datasets: [{
+      data: [67, 26, 12, 7 , 11, 10, 7, 5],
+      backgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56',
+      '#23917d',
+      '#35db45',
+      '#ba1634',
+      '#2f5e5b',
+      '#677cc7',
+      ],
+      hoverBackgroundColor: [
+      '#FF6384',
+      '#36A2EB',
+      '#FFCE56',
+      '#23917d',
+      '#35db45',
+      '#ba1634',
+      '#2f5e5b',
+      '#677cc7',
+      ]
+    }]
+  },
   appointments: appointments,
 }
 
@@ -45,12 +70,13 @@ export const reducers = (state = initData, action) => {
       return { state, isAuth: false };
     
       case actions.ADD_DEAL: 
-      const deals = state.chartData.map((deal) => {
-      if (deal.status === action.status) {
-      deal.total += 1 }
-      return deal
-      })
-      return { ...state, chartData: deals}
+      // if (deal.status === action.status) {
+      // deal.total += 1 }
+      const index = state.chartData.labels.indexOf(action.status);
+
+      const deals = state.chartData.datasets[0].data[index] += 1
+      const x = state.chartData.datasets[0].data
+      return { ...state, x: deals}
 
     default:
       return state;
