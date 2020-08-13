@@ -4,13 +4,16 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initData from "./init-data";
 import Modal from "../modal/Modal";
 import styled from "styled-components";
+import {columsWrite} from '../../store/actions'
+import {columsOrderWrite} from '../../store/actions'
+import {connect} from 'react-redux';
 
 const Container = styled.div`
   display: flex;
 `;
 
 class DragModel extends React.Component {
-  state = initData;
+  // state = initData;
 
   onDragStart = () => {
     document.body.style.color = "#c8d5b9";
@@ -20,7 +23,7 @@ class DragModel extends React.Component {
   onDragUpdate = (update) => {
     const { destination } = update;
     const opacity = destination
-      ? destination.index / Object.keys(this.state.tasks).length
+      ? destination.index / Object.keys(this.props.tasks).length
       : 0;
     document.body.style.backgroundColor = `rgba(53, 141, 317, ${opacity})`;
   };
@@ -41,21 +44,21 @@ class DragModel extends React.Component {
       return;
     }
 
-    if(type === 'column') {
-      const newColumnOrder = Array.from(this.state.column0order);
-      newColumnOrder.splice(source.index, 1)
+    if (type === "column") {
+      const newColumnOrder = Array.from(this.props.column0order);
+      newColumnOrder.splice(source.index, 1);
       newColumnOrder.splice(destination.index, 0, draggableId);
 
       const newState = {
         ...this.state,
         column0order: newColumnOrder,
       };
-      this.setState(newState);
+      this.props.columsOrderWrite(newColumnOrder);
       return;
     }
 
-    const start = this.state.columns[source.droppableId];
-    const finish = this.state.columns[destination.droppableId];
+    const start = this.props.columns[source.droppableId];
+    const finish = this.props.columns[destination.droppableId];
 
     if (start === finish) {
       const newTaskIds = Array.from(start.taskId);
@@ -66,14 +69,14 @@ class DragModel extends React.Component {
         ...start,
         taskId: newTaskIds,
       };
-      const newState = {
-        ...this.state,
-        columns: {
-          ...this.state.columns,
-          [newColumn.id]: newColumn,
-        },
-      };
-      this.setState(newState);
+      // const newState = {
+      //   ...this.state,
+      //   columns: {
+      //     ...this.props.columns,
+      //     [newColumn.id]: newColumn,
+      //   },
+      // };
+      this.props.columsWrite({[newColumn.id]: newColumn,});
       return;
     }
 
@@ -92,15 +95,15 @@ class DragModel extends React.Component {
       taskId: finishTaskIds,
     };
 
-    const newState = {
-      ...this.state,
-      columns: {
-        ...this.state.columns,
-        [newStart.id]: newStart,
-        [newFinish.id]: newFinish,
-      },
-    };
-    this.setState(newState);
+    // const newState = {
+    //   ...this.state,
+    //   columns: {
+    //     ...this.props.columns,
+    //     [newStart.id]: newStart,
+    //     [newFinish.id]: newFinish,
+    //   },
+    // };
+    this.props.columsWrite({ [newStart.id]: newStart, [newFinish.id]: newFinish });
   };
 
   render() {
@@ -108,19 +111,28 @@ class DragModel extends React.Component {
       <DragDropContext
         onDragStart={this.onDragStart}
         onDragUpdate={this.onDragUpdate}
-        onDragEnd={this.onDragEnd}>
+        onDragEnd={this.onDragEnd}
+      >
         <Modal />
-        <Droppable droppableId="all-columns" direction="horizontal" type="column">
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
+        >
           {(provided) => (
-            <Container
-              {...provided.droppableProps}
-              ref={provided.innerRef}
-            >
-              {this.state.column0order.map((columnId, index) => {
-                const column = this.state.columns[columnId];
-                const tasks = column.taskId.map(
-                  (task) => this.state.tasks[task]);
-                return <Column key={column.id} column={column} tasks={tasks} index={index} />;
+            <Container {...provided.droppableProps} ref={provided.innerRef}>
+              {console.log('column0order',this.props.column0order)}
+              {this.props.column0order?.map((columnId, index) => {
+                const column = this.props.columns[columnId];
+                const tasks = column.taskId.map((task) => this.props.tasks[task]);
+                return (
+                  <Column
+                    key={column.id}
+                    column={column}
+                    tasks={tasks}
+                    index={index}
+                  />
+                );
               })}
               {provided.placeholder}
             </Container>
@@ -131,4 +143,21 @@ class DragModel extends React.Component {
   }
 }
 
-export default DragModel;
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks,
+    columns: state.columns,
+    column0order: state.column0order,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    columsWrite: (columsObj) => dispatch(columsWrite(columsObj)),
+    columsOrderWrite: (columsObj) => dispatch(columsOrderWrite(columsObj)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DragModel);
+
+// export default DragModel;
