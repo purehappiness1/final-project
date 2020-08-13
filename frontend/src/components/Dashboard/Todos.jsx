@@ -41,14 +41,6 @@ const theme = createMuiTheme({
   },
 });
 
-
-
-const styles = {
-  titleText: {
-    textAlign: 'left',
-  }
-};
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
