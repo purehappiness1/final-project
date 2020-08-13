@@ -7,6 +7,18 @@ import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#7eddf2',
+    },
+    
+  },
+});
 
 function Copyright() {
   return (
@@ -73,7 +85,8 @@ const useStyles = makeStyles((theme) => ({
   bannerArea: {
     width: "100%",
     height: "100vh",
-    background: 'url("https://unsplash.it/1300/600?random")',
+    // background: 'url("https://unsplash.it/1300/600?random")',
+    background: 'url("https://i.picsum.photos/id/668/1300/600.jpg?hmac=oAem65feoKp1r9sTGjO7C_vBeM_XI2j3NuAwgcUd-ug")',
     backgroundSize: "cover",
   },
   contentArea: {
@@ -84,10 +97,12 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     textAlign: "center",
+    fontWeight: "bolder",
+    color: "#131617",
   },
   h1: {
     fontSize: "60px",
-    color: "#fff",
+    color: "#7eddf2",
   },
   container: {
     width: "70%",
@@ -140,6 +155,7 @@ export default function Pricing() {
   const classes = useStyles();
 
   return (
+    <ThemeProvider theme={theme}>
     <React.Fragment>
       <CssBaseline />
       <div className={classes.all}>
@@ -168,7 +184,7 @@ export default function Pricing() {
               <Button
                 href="/register"
                 color="primary"
-                variant="outlined"
+                variant="contained"
                 className={classes.content}
               >
                 Register
@@ -176,7 +192,7 @@ export default function Pricing() {
               <Button
                 href="/signin"
                 color="primary"
-                variant="outlined"
+                variant="contained"
                 className={classes.content}
               >
                 Login
@@ -360,5 +376,6 @@ export default function Pricing() {
       {/* </Container> */}
       {/* End footer */}
     </React.Fragment>
+    </ThemeProvider>
   );
 }

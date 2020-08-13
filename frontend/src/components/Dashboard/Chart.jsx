@@ -39,15 +39,23 @@ import {
 } from '@devexpress/dx-react-chart-material-ui';
 import { logOut } from "../../store/actions";
 import { ValueScale } from '@devexpress/dx-react-chart';
-
 import { withStyles } from '@material-ui/core/styles';
-
-import {
-  schemeSet1,
-} from 'd3-scale-chromatic';
-
+import { schemeSet1 } from 'd3-scale-chromatic';
 import { Palette } from '@devexpress/dx-react-chart';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#64b5f6',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 
 const salesData = [
@@ -229,6 +237,7 @@ export default function Statistics() {
   const id = openIcon ? 'simple-popover' : undefined;
 
   return (
+    <ThemeProvider theme={theme}>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -374,5 +383,6 @@ export default function Statistics() {
       </main>
 
     </div>
+    </ThemeProvider>
   );
 }

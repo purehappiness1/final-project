@@ -15,6 +15,20 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { addName } from "../../store/actions";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { info } from '@material-ui/core/colors';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#64b5f6',
+    },
+    secondary: {
+      main: '#11cb5f',
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -113,6 +127,8 @@ export default function SignUp() {
   };
 
   return (
+    
+<ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -215,5 +231,6 @@ export default function SignUp() {
         <Copyright />
       </Box>
     </Container>
+    </ThemeProvider>
   );
 }
