@@ -41,7 +41,6 @@ class DragModel extends React.Component {
       return;
     }
 
-
     if(type === 'column') {
       const newColumnOrder = Array.from(this.state.column0order);
       newColumnOrder.splice(source.index, 1)
@@ -54,7 +53,6 @@ class DragModel extends React.Component {
       this.setState(newState);
       return;
     }
-
 
     const start = this.state.columns[source.droppableId];
     const finish = this.state.columns[destination.droppableId];
@@ -110,8 +108,7 @@ class DragModel extends React.Component {
       <DragDropContext
         onDragStart={this.onDragStart}
         onDragUpdate={this.onDragUpdate}
-        onDragEnd={this.onDragEnd}
-      >
+        onDragEnd={this.onDragEnd}>
         <Modal />
         <Droppable droppableId="all-columns" direction="horizontal" type="column">
           {(provided) => (
@@ -122,8 +119,7 @@ class DragModel extends React.Component {
               {this.state.column0order.map((columnId, index) => {
                 const column = this.state.columns[columnId];
                 const tasks = column.taskId.map(
-                  (task) => this.state.tasks[task]
-                );
+                  (task) => this.state.tasks[task]);
                 return <Column key={column.id} column={column} tasks={tasks} index={index} />;
               })}
               {provided.placeholder}
