@@ -40,14 +40,13 @@ const theme = createMuiTheme({
   },
 });
 
+import DragModel from '../dnd/index'
+
 const styles = {
   titleText: {
     textAlign: 'left',
   }
 };
-
-
-
 
 const drawerWidth = 240;
 
@@ -235,13 +234,12 @@ export default function Statistics() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-            здесь будут заметки
+                  <DragModel />
               </Paper>
             </Grid>
           </Grid>
         </Container>
       </main>
-
     </div>
     </ThemeProvider>
   );
