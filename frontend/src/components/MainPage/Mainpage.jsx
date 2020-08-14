@@ -85,11 +85,25 @@ const useStyles = makeStyles((theme) => ({
   content: {
     textAlign: "center",
     fontWeight: "bolder",
-    color: "#131617",
+    color: "black",
+  },
+  btn: {
+    backgroundColor: '#68b0ab'
+  },
+  text: {
+    border: '1px solid grey',
+    borderRadius: '5px',
+    background: 'white',
+    opacity: '.6',
+    marginBottom: '20px',
+    padding: '10px',
+    fontSize: 'smaller',
   },
   h1: {
     fontSize: "60px",
-    color: "#7eddf2",
+    color: "#68b0ab",
+    marginTop: '70px',
+    marginBottom: '10px',
   },
   container: {
     width: "70%",
@@ -149,6 +163,7 @@ export default function Pricing() {
             <div className={classes.contentArea}>
               <div className={classes.content}>
                 <h1 className={classes.h1}>Ваш бизнес растёт?</h1>
+                <div className={classes.text}>
                 <h3>Не теряйте клиентов и увеличивайте доход</h3>
                 <ul>
                   <li>
@@ -168,19 +183,21 @@ export default function Pricing() {
                     вас;
                   </li>
                 </ul>
+                </div>
+                
                 <Button
                   href="/register"
-                  color="primary"
                   variant="contained"
                   className={classes.content}
+                  className={classes.btn}
                 >
                   Register
                 </Button>
                 <Button
                   href="/signin"
-                  color="primary"
                   variant="contained"
                   className={classes.content}
+                  className={classes.btn}
                 >
                   Login
                 </Button>
@@ -324,8 +341,6 @@ export default function Pricing() {
         </div>
 
         {/* Footer */}
-        {/* <Container maxWidth="md" component="footer" className={classes.footer}> */}
-        {/* <Box mt={5}> */}
         <div className={classes.contentContainer}>
           <div className={classes.content1}>
             <h5>BetaCRM</h5>
@@ -357,8 +372,6 @@ export default function Pricing() {
             <button className={classes.button}>Подписаться</button>
           </div>
         </div>
-        {/* </Box> */}
-        {/* </Container> */}
         {/* End footer */}
       </React.Fragment>
     </ThemeProvider>
