@@ -44,8 +44,8 @@ import { schemeSet1 } from 'd3-scale-chromatic';
 import { Palette } from '@devexpress/dx-react-chart';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import {Pie} from 'react-chartjs-2';
-import {Bar} from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 
 const theme = createMuiTheme({
   palette: {
@@ -86,7 +86,7 @@ const salesData = {
       borderWidth: 1,
       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
       hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [12, 16, 10, 7, 5, 5, 7, 5, 0,0,0,0]
+      data: [12, 16, 10, 7, 5, 5, 7, 5, 0, 0, 0, 0]
     }
   ]
 };
@@ -255,71 +255,71 @@ export default function Statistics() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            {firstName}&nbsp;{lastName}
-          </Typography>
-          <IconButton color="inherit">
-          <Badge badgeContent={current.length} color="secondary" onClick={handleClick}>
-              <NotificationsIcon />
-            </Badge>
-            <Popover
-              id={id}
-              open={openIcon}
-              anchorEl={anchorEl}
-              onClose={handleCloseIcon}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
             >
-              <Typography className={classes.typography}>{title}</Typography>
-            </Popover>
-          </IconButton>
+              <MenuIcon />
+            </IconButton>
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              {firstName}&nbsp;{lastName}
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={current.length} color="secondary" onClick={handleClick}>
+                <NotificationsIcon />
+              </Badge>
+              <Popover
+                id={id}
+                open={openIcon}
+                anchorEl={anchorEl}
+                onClose={handleCloseIcon}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <Typography className={classes.typography}>{title}</Typography>
+              </Popover>
+            </IconButton>
           &nbsp;
           <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
-            Logout
+              Logout
       </Link>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-      </Drawer>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={12}>
-              <Paper>
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>{mainListItems}</List>
+          <Divider />
+        </Drawer>
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={8} lg={12}>
+                <Paper>
                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                     NEW
       </Button>
@@ -366,24 +366,24 @@ export default function Statistics() {
           </Button>
                     </DialogActions>
                   </Dialog>
-                  
-                <Pie data={chartData} />
-                
-                <Bar
-          data={salesData}
-          // width={50}
-          // height={25}
-          // options={{
-          //   maintainAspectRatio: false
-          // }}
-        />
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
 
-    </div>
+                  <Pie data={chartData} />
+
+                  <Bar
+                    data={salesData}
+                  // width={50}
+                  // height={25}
+                  // options={{
+                  //   maintainAspectRatio: false
+                  // }}
+                  />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Container>
+        </main>
+
+      </div>
     </ThemeProvider>
   );
 }

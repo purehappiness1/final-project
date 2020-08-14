@@ -4,17 +4,32 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import initData from "./init-data";
 import Modal from "../modal/Modal";
 import styled from "styled-components";
-import {columsWrite} from '../../store/actions'
-import {columsOrderWrite} from '../../store/actions'
-import {connect} from 'react-redux';
+import { columsWrite } from '../../store/actions'
+import { columsOrderWrite } from '../../store/actions'
+import { connect } from 'react-redux';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#c8f7ef',
+    },
+    secondary: {
+      main: '#e55757',
+    },
+  },
+});
 
 const Container = styled.div`
   display: flex;
 `;
 
+document.body.style.backgroundColor = `rgba(53, 141, 317, 0,4)`;
+
 class DragModel extends React.Component {
   // state = initData;
-
+  
   onDragStart = () => {
     document.body.style.color = "#c8d5b9";
     document.body.style.transition = "background-color 0.2s ease";
@@ -76,7 +91,7 @@ class DragModel extends React.Component {
       //     [newColumn.id]: newColumn,
       //   },
       // };
-      this.props.columsWrite({[newColumn.id]: newColumn,});
+      this.props.columsWrite({ [newColumn.id]: newColumn, });
       return;
     }
 
@@ -108,37 +123,40 @@ class DragModel extends React.Component {
 
   render() {
     return (
-      <DragDropContext
-        onDragStart={this.onDragStart}
-        onDragUpdate={this.onDragUpdate}
-        onDragEnd={this.onDragEnd}
-      >
-        <Modal />
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
+      <ThemeProvider theme={theme}>
+        <DragDropContext backgroundColor="primary"
+          onDragStart={this.onDragStart}
+          onDragUpdate={this.onDragUpdate}
+          onDragEnd={this.onDragEnd}
         >
-          {(provided) => (
-            <Container {...provided.droppableProps} ref={provided.innerRef}>
-              {console.log('column0order',this.props.column0order)}
-              {this.props.column0order?.map((columnId, index) => {
-                const column = this.props.columns[columnId];
-                const tasks = column.taskId.map((task) => this.props.tasks[task]);
-                return (
-                  <Column
-                    key={column.id}
-                    column={column}
-                    tasks={tasks}
-                    index={index}
-                  />
-                );
-              })}
-              {provided.placeholder}
-            </Container>
-          )}
-        </Droppable>
-      </DragDropContext>
+          <Modal />
+          <Droppable backgroundColor="primary"
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+          >
+            {(provided) => (
+              <Container backgroundColor="primary" {...provided.droppableProps} ref={provided.innerRef}>
+                {console.log('column0order', this.props.column0order)}
+                {this.props.column0order?.map((columnId, index) => {
+                  const column = this.props.columns[columnId];
+                  const tasks = column.taskId.map((task) => this.props.tasks[task]);
+                  return (
+                    <Column
+                      key={column.id}
+                      column={column}
+                      tasks={tasks}
+                      index={index}
+                      backgroundColor="primary"
+                    />
+                  );
+                })}
+                {provided.placeholder}
+              </Container>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </ThemeProvider>
     );
   }
 }
