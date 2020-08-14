@@ -170,93 +170,93 @@ export default function Clients() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
-      >
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(
-              classes.menuButton,
-              open && classes.menuButtonHidden
-            )}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-          {firstName}&nbsp;{lastName}
-
-          </Typography>
-          <IconButton color="inherit">
-          <Badge badgeContent={current.length} color="secondary" onClick={handleClick}>
-              <NotificationsIcon />
-            </Badge>
-            <Popover
-              id={id}
-              open={openIcon}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'center',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'center',
-              }}
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          position="absolute"
+          className={clsx(classes.appBar, open && classes.appBarShift)}
+        >
+          <Toolbar className={classes.toolbar}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(
+                classes.menuButton,
+                open && classes.menuButtonHidden
+              )}
             >
-              <Typography className={classes.typography}>{title}</Typography>
-            </Popover>
-          </IconButton>
+              <MenuIcon />
+            </IconButton>
+
+            <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+              {firstName}&nbsp;{lastName}
+
+            </Typography>
+            <IconButton color="inherit">
+              <Badge badgeContent={current.length} color="secondary" onClick={handleClick}>
+                <NotificationsIcon />
+              </Badge>
+              <Popover
+                id={id}
+                open={openIcon}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                <Typography className={classes.typography}>{title}</Typography>
+              </Popover>
+            </IconButton>
           &nbsp;
           <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
-        Logout
+              Logout
       </Link>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          variant="permanent"
+          classes={{
+            paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          }}
+          open={open}
+        >
+          <div className={classes.toolbarIcon}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
 
-        <List>{mainListItems}</List>
-        <Divider />
-        {/* <List>{secondaryListItems}</List> */}
-      </Drawer>
+          <List>{mainListItems}</List>
+          <Divider />
+          {/* <List>{secondaryListItems}</List> */}
+        </Drawer>
 
-      {/* <Route path="/clients"> */}
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={12}>
-              <Paper>
-                <React.Fragment>
-                  <DataClients />
-                </React.Fragment>
-              </Paper>
+        {/* <Route path="/clients"> */}
+        <main className={classes.content}>
+          <div className={classes.appBarSpacer} />
+          <Container maxWidth="lg" className={classes.container}>
+            <Grid container spacing={3}>
+              {/* Chart */}
+              <Grid item xs={12} md={8} lg={12}>
+                <Paper>
+                  <React.Fragment>
+                    <DataClients />
+                  </React.Fragment>
+                </Paper>
+              </Grid>
             </Grid>
-          </Grid>
-        </Container>
-      </main>
-    </div>
+          </Container>
+        </main>
+      </div>
     </ThemeProvider>
   );
 }
