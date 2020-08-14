@@ -27,7 +27,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Календарь" />
+      <ListItemText primary="Calendar" />
     </ListItem>
     <ListItem
       button
@@ -37,7 +37,7 @@ export const mainListItems = (
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Клиенты" />
+      <ListItemText primary="Clients" />
     </ListItem>
     <ListItem
       button
@@ -47,7 +47,7 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Статистика" />
+      <ListItemText primary="Statistics" />
     </ListItem>
     <ListItem
       button
@@ -57,7 +57,7 @@ export const mainListItems = (
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Заметки" />
+      <ListItemText primary="Notes" />
     </ListItem>
   </div>
 );

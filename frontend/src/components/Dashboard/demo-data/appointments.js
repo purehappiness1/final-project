@@ -18,9 +18,9 @@ export const appointments = [
     id: 2,
     location: 'Room 2',
   }, {
-    title: 'Approve Personal Computer Upgrade Plan',
-    startDate: new Date(2020, 7, 14, 10, 0),
-    endDate: new Date(2020, 7, 14, 11, 0),
+    title: 'Elbrus presentation',
+    startDate: new Date(2020, 7, 14, 9, 0),
+    endDate: new Date(2020, 7, 14, 18, 0),
     id: 3,
     location: 'Room 2',
   }, {
