@@ -25,8 +25,8 @@ const Modal = () => {
 
   return (
     <React.Fragment>
-      <Button onClick={openModal} color="primary" variant="contained" style={styles3.btn}>Create a board</Button>
-      <Button onClick={openModal} color="primary" variant="contained" style={styles3.btn}>Create a task</Button>
+      <Button onClick={openModal} disableElevation color="primary" variant="contained" style={styles3.btn}>New board</Button>
+      <Button onClick={openModal} disableElevation color="primary" variant="contained" style={styles3.btn}>New task</Button>
       {state.isOpen && (
         <div style={styles.modal}>
           <div style={styles1.modalBody}>
@@ -82,6 +82,7 @@ const styles1 = {
 const styles3 = {
     btn: {
       margin: '5px',
+      border: '1px solid black'
     },
     textarea: {
       width: "300px",
