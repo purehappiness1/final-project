@@ -37,7 +37,7 @@ const theme = createMuiTheme({
       main: '#64b5f6',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#e55757',
     },
   },
 });
@@ -175,11 +175,7 @@ export default function Dashboard() {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-      
-     
-    
         <Toolbar color="primary" 
-        // className={classes.toolbar}
         >
           <IconButton
             edge="start"

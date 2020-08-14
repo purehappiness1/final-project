@@ -45,15 +45,7 @@ import { Palette } from '@devexpress/dx-react-chart';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import {Pie} from 'react-chartjs-2';
-
-import { defaults } from 'react-chartjs-2';
-
-// Disable animating charts by default.
-// defaults.global.animation.duration = 5000;
-
-// window.onload=function(){
-//   setTimeout(() => Statistics(), 2000);
-// };
+import {Bar} from 'react-chartjs-2';
 
 const theme = createMuiTheme({
   palette: {
@@ -61,28 +53,43 @@ const theme = createMuiTheme({
       main: '#64b5f6',
     },
     secondary: {
-      main: '#11cb5f',
+      main: '#e55757',
     },
   },
 });
 
 // setTimeout(() => Statistics(), 1000);
 
-const salesData = [
-  { month: 'Январь', sale: 12 },
-  { month: 'Февраль', sale: 16 },
-  { month: 'Март', sale: 10 },
-  { month: 'Апрель', sale: 7 },
-  { month: 'Май', sale: 5 },
-  { month: 'Июнь', sale: 5 },
-  { month: 'Июль', sale: 7 },
-  { month: 'Август', sale: 5 },
-  { month: 'Сентябрь', sale: 0 },
-  { month: 'Октябрь', sale: 0 },
-  { month: 'Ноябрь', sale: 0 },
-  { month: 'Декабрь', sale: 0 },
-];
+// const salesData = [
+//   { month: 'Январь', sale: 12 },
+//   { month: 'Февраль', sale: 16 },
+//   { month: 'Март', sale: 10 },
+//   { month: 'Апрель', sale: 7 },
+//   { month: 'Май', sale: 5 },
+//   { month: 'Июнь', sale: 5 },
+//   { month: 'Июль', sale: 7 },
+//   { month: 'Август', sale: 5 },
+//   { month: 'Сентябрь', sale: 0 },
+//   { month: 'Октябрь', sale: 0 },
+//   { month: 'Ноябрь', sale: 0 },
+//   { month: 'Декабрь', sale: 0 },
+// ];
 
+const salesData = {
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+  datasets: [
+    {
+      label: 'Sales',
+      backgroundColor: 'rgba(75,192,192,0.4)',
+      height: '50px',
+      borderColor: 'rgba(75,192,192,0.4)',
+      borderWidth: 1,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: [12, 16, 10, 7, 5, 5, 7, 5, 0,0,0,0]
+    }
+  ]
+};
 
 const styles = {
   titleText: {
@@ -313,19 +320,11 @@ export default function Statistics() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={12}>
               <Paper>
-                {/* <Chart
-                  data={chartData}>
-                  <Palette scheme={schemeSet1} />
-                  <PieSeries
-                    valueField="total"
-                    argumentField="status"
-                  />
-                <Title text="Сделки 2020" textComponent={TextComponent} />*/}
                   <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                    Создать
+                    NEW
       </Button>
                   <Dialog open={openForm} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Новая сделка</DialogTitle>
+                    <DialogTitle id="form-dialog-title">New deal</DialogTitle>
                     <DialogContent>
                       <form className={classes.form} noValidate
                         name="loginForm">
@@ -360,34 +359,24 @@ export default function Statistics() {
                     </DialogContent>
                     <DialogActions>
                       <Button onClick={handleClose} color="primary">
-                        отмена
+                        cancel
           </Button>
                       <Button onClick={handleSave} color="primary">
-                        сохранить
+                        save
           </Button>
                     </DialogActions>
                   </Dialog>
-                  {/* <Legend />
-                </Chart> */} 
+                  
                 <Pie data={chartData} />
                 
-                {/* <Chart
-                  data={salesData}
-                >
-                  <ValueScale name="sale" />
-                  <ValueScale name="total" />
-
-                  <ArgumentAxis />
-                  <ValueAxis scaleName="sale" showGrid={false} showLine showTicks />
-                  <ValueAxis scaleName="total" position="right" showGrid={false} showLine showTicks />
-                  <BarSeries
-                    valueField="sale"
-                    argumentField="month"
-                    scaleName="sale"
-                  />
-                  <Title text="Продажи 2020" textComponent={TextComponent} />
-
-                </Chart> */}
+                <Bar
+          data={salesData}
+          // width={50}
+          // height={25}
+          // options={{
+          //   maintainAspectRatio: false
+          // }}
+        />
               </Paper>
             </Grid>
           </Grid>

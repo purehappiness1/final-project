@@ -41,14 +41,14 @@ const initData = {
   isAuth: false,
   chartData: {
     labels: [
-      'Подписан договор',
-      'Переговоры',
-      'Первичный контакт',
-      'Принимают решение',
-      'Согласование договора',
-      'Назначена встреча',
-      'Сделка не состоялась',
-      'Другое'
+      'Contract signed',
+      'Negotiations',
+      'First contact',
+      'Making a decision',
+      'Contract agreement',
+      'Meeting planned',
+      'Refused',
+      'Other'
     ],
     datasets: [{
       data: [67, 26, 12, 7 , 11, 10, 7, 5],
