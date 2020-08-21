@@ -26,10 +26,8 @@ function App() {
   }
   return (
     <div >
-
       <Router>
         <Switch>
-          
           <Route path="/homepage">
             <Mainpage />
           </Route>
@@ -50,7 +48,6 @@ function App() {
           <PrivateRoute path='/chart' child={<Chart />}
           >
             <Chart />
-            
           </PrivateRoute>
           <PrivateRoute path='/todos' child={<Todos />}
           >

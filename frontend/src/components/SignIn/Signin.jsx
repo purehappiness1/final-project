@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%', 
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -97,7 +97,7 @@ export default function SignInSide() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    const response = await fetch(`http://localhost:3100/login`, {
+    const response = await fetch(`/login`, {
       method: 'POST',
       body: JSON.stringify({
         email: email.email,
@@ -144,11 +144,9 @@ export default function SignInSide() {
               required
               fullWidth
               id="email"
-
               type="email"
               value={email.email}
               label="Email адрес"
-
               name="email"
               autoComplete="email"
               autoFocus

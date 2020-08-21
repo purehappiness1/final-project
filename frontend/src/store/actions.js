@@ -11,8 +11,6 @@ export const columsWrite = (objectColumn) => ({ type: actions.COLUMNS,  objectCo
 
 export const columsOrderWrite = (objectColumn) => ({ type: actions.COLUMNS_ORDER,  objectColumn });
 
-
-
 export const addName = (firstName, lastName) => ({ type: actions.ADD_NAME,  firstName, lastName });
 
 export const logOut = () => ({ type: actions.LOGOUT })

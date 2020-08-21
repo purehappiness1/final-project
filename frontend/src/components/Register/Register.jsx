@@ -99,7 +99,7 @@ export default function SignUp() {
   const submitHandler = async (event) => {
     event.preventDefault();
 
-    const response = await fetch(`http://localhost:3100/signup`, {
+    const response = await fetch(`/signup`, {
       method: "POST",
       body: JSON.stringify({
         firstName: firstName.firstName,

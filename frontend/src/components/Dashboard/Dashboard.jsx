@@ -217,17 +217,14 @@ export default function Dashboard() {
           <Link color="inherit" href="/homepage" onClick={() => dispatch(logOut())}>
               Logout
       </Link>
-
           </Toolbar>
-
         </AppBar>
         <Drawer
           variant="permanent"
           classes={{
             paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
           }}
-          open={open}
-        >
+          open={open}>
           <div className={classes.toolbarIcon}>
             <IconButton onClick={handleDrawerClose}>
               <ChevronLeftIcon />
@@ -241,7 +238,6 @@ export default function Dashboard() {
           <div className={classes.appBarSpacer} />
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
-
               <Grid item xs={12} md={8} lg={12}>
                 <Paper>
                   <Calendar />
@@ -250,7 +246,6 @@ export default function Dashboard() {
             </Grid>
           </Container>
         </main>
-
       </div>
     </ThemeProvider>
   );

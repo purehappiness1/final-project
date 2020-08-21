@@ -18,10 +18,8 @@ router.post('/new', async (req, res, next) => {
 
 /* UPDATE some data or do something else */
 router.patch('/:id', async (req, res, next) => {
-  // если будет такая нужна
   const { board } = req.body;
   const boards = await Boards.findById(req.params.id);
-  // логика работы с компонентом
   await boards.save();
   res.send(boards)
 });

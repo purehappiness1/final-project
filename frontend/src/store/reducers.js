@@ -32,10 +32,6 @@ const initData = {
   },
   column0order: ['column-1', 'column-2', 'column-3', 'column-4'],
 
-
-
-
-
   firstName: '',
   lastName: '',
   isAuth: false,
@@ -93,8 +89,6 @@ export const reducers = (state = initData, action) => {
       return {...state, 
         tasks: {...state.tasks, [`task-${id}`]: {id: `task-${id}`, content: action.value}},
         columns: {...state.columns, 'column-1': {id: 'column-1', title: 'To do', taskId: [...state.columns["column-1"].taskId, `task-${id}` ]}} };
-      // return { ...state, tasks: { ...state.tasks, { id: `task-${Math.random().toString}`, content: action.value} };
-
 
 
     case actions.ADD_NAME:
@@ -102,8 +96,6 @@ export const reducers = (state = initData, action) => {
     case actions.LOGOUT:
       return { state, isAuth: false };
       case actions.ADD_DEAL: 
-      // if (deal.status === action.status) {
-      // deal.total += 1 }
       const index = state.chartData.labels.indexOf(action.status);
       const deals = state.chartData.datasets[0].data[index] += 1
       const x = state.chartData.datasets[0].data

@@ -204,9 +204,6 @@ export default function Pricing() {
               </div>
             </div>
           </div>
-
-          {/* main part */}
-
           <div className={classes.container}>
             <div className={classes.box}>
               <h3>Воронка продаж</h3>
@@ -267,85 +264,11 @@ export default function Pricing() {
           </div>
 
           <div className={classes.container}>
-            <div className={classes.box}>
-              <h3>Нас выбирают лидеры в своей отрасли</h3>
-              <h5>
-                Сегодня BetaCRM пользуются более 1000 компаний. Некоторых,
-                вероятно, вы можете знать.
-              </h5>
-              <div className="imgs">
-                <img
-                  src="https://alfacrm.pro/images/clients/iq007.png"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://alfacrm.pro/images/clients/usmas.png"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://alfacrm.pro/images/clients/menar.png"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://alfacrm.pro/images/clients/ligarobotov.png"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://alfacrm.pro/images/clients/smartunivercity.svg"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://alfacrm.pro/images/clients/rs.png"
-                  width="150"
-                  height="70px"
-                />
-
-                <img
-                  src="https://cdn-0.brodude.ru/jT8R6YZc6gRUDXH17Q-jAsbtFb74Z-VOJ6T1aI1x6WQ/rs:fill:0:0:0/g:ce/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfMy4wMy4yMDE0X3hxaWxEdUl2dmc1ODkuanBn"
-                  width="70"
-                  height="70px"
-                />
-                <img
-                  src="https://cdn-2.brodude.ru/JvstWGbCxRhY7pansK1qeXcHqhJG3vIzWkFGMvucZLM/rs:fill:640:407:0/g:ce:0:0/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfNi4wMy4yMDE0Xzd5ajRHNXhQQ1ExQzEuanBn"
-                  width="90"
-                  height="70px"
-                />
-                <img
-                  src="https://cdn-2.brodude.ru/g8nAAvpy6W4FWFEVQCqkA_ALzEBSMyJvEwGtSjubrCo/rs:fill:640:317:0/g:ce:0:0/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfNi4wMy4yMDE0X2xsN2hkbGV1M0liNXEuanBn"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://cdn-3.brodude.ru/Dy8U4c4y02kiIlZSUD9R22-e_Y97OhJUeOj8qqZTmpE/rs:fill:640:183:0/g:ce:0:0/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfNi4wMy4yMDE0X2lXSElIWUJWYTJ2NVEuZ2lm"
-                  width="150"
-                  height="70px"
-                />
-                <img
-                  src="https://cdn-2.brodude.ru/FwK8PvWzQgIn8LG5O0ZWOrZ3tcEdk_5CqwaNYhZ9Wx4/rs:fill:640:469:0/g:ce:0:0/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfNi4wMy4yMDE0X2x5cU9pNXYxOTBkYW8uanBn"
-                  width="120"
-                  height="70px"
-                />
-                <img
-                  src="https://cdn-0.brodude.ru/VdYuh0O0L-UnJx2zXb0K4Lj4NbhXJed65TL3-bEgJbk/rs:fill:640:479:0/g:ce:0:0/c:0:0/aHR0cHM6Ly9icm9kdWRlLnJ1L3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDE0LzAzL2Jyb2R1ZGUucnVfNi4wMy4yMDE0X0huN0l2S0U2Y0RHcE0uanBn"
-                  width="110"
-                  height="70px"
-                />
-              </div>
             </div>
           </div>
-        </div>
 
-        {/* Footer */}
         <div className={classes.contentContainer}>
-          <div className={classes.content1}>
-            <h5>BetaCRM</h5>
-            <p>BetaCRM — CRM система для учебного центра. Sapienti sat.</p>
-          </div>
+          
           <div className="content2">
             <ul class="list-inline">
               <li>
@@ -372,7 +295,6 @@ export default function Pricing() {
             <button className={classes.button}>Подписаться</button>
           </div>
         </div>
-        {/* End footer */}
       </React.Fragment>
     </ThemeProvider>
   );

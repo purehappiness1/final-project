@@ -58,23 +58,6 @@ const theme = createMuiTheme({
   },
 });
 
-// setTimeout(() => Statistics(), 1000);
-
-// const salesData = [
-//   { month: 'Январь', sale: 12 },
-//   { month: 'Февраль', sale: 16 },
-//   { month: 'Март', sale: 10 },
-//   { month: 'Апрель', sale: 7 },
-//   { month: 'Май', sale: 5 },
-//   { month: 'Июнь', sale: 5 },
-//   { month: 'Июль', sale: 7 },
-//   { month: 'Август', sale: 5 },
-//   { month: 'Сентябрь', sale: 0 },
-//   { month: 'Октябрь', sale: 0 },
-//   { month: 'Ноябрь', sale: 0 },
-//   { month: 'Декабрь', sale: 0 },
-// ];
-
 const salesData = {
   labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   datasets: [
@@ -366,23 +349,13 @@ export default function Statistics() {
           </Button>
                     </DialogActions>
                   </Dialog>
-
                   <Pie data={chartData} />
-
-                  <Bar
-                    data={salesData}
-                  // width={50}
-                  // height={25}
-                  // options={{
-                  //   maintainAspectRatio: false
-                  // }}
-                  />
+                  <Bar data={salesData}/>
                 </Paper>
               </Grid>
             </Grid>
           </Container>
         </main>
-
       </div>
     </ThemeProvider>
   );
