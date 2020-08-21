@@ -41,9 +41,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
-// const loginSettings = { successRedirect: '/profile', failureRedirect: '/login' };
-// const signupSettings = { successRedirect: '/profile', failureRedirect: '/signup' };
-
 passport.use(
   "signup",
   new LocalStrategy(
@@ -118,19 +115,12 @@ function authenticationMiddleware() {
       res.locals.auth = true;
       return next();
     }
-    //res.redirect('/home');
   };
 }
-
-app.get("/profile/:id", authenticationMiddleware(), async (req, res) => {
-  //  const currentUser = await User.findById(req.session.passport.user._id).populate('games').lean();
-});
 
 app.get("/", authenticationMiddleware(), function (req, res) {
   res.render("index");
 });
-
-// app.post('/signup', passport.authenticate('signup' /* , signupSettings */));
 
 app.post("/signup", function (req, res, next) {
   console.log(req.body);
@@ -149,8 +139,6 @@ app.post("/signup", function (req, res, next) {
     });
   })(req, res, next);
 });
-
-// app.post('/login', passport.authenticate('local'/* , loginSettings */));
 
 app.post("/login", function (req, res, next) {
   passport.authenticate("local", function (err, user, info) {
@@ -181,6 +169,6 @@ app.use("/users", usersRouter);
 passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
-app.listen(3100, () => {
-  console.log("Server started on 3100");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server started");
 });

@@ -19,7 +19,7 @@ export const appointments = [
     location: 'Room 2',
   }, {
     title: 'Elbrus presentation',
-    startDate: new Date(2020, 7, 14, 9, 0),
+    startDate: new Date(2020, 7, 14, 16, 0),
     endDate: new Date(2020, 7, 14, 18, 0),
     id: 3,
     location: 'Room 2',

@@ -29,7 +29,7 @@ const Modal = () => {
       <Button onClick={openModal} disableElevation color="primary" variant="contained" style={styles3.btn}>New task</Button>
       {state.isOpen && (
         <div style={styles.modal}>
-          <div style={styles1.modalBody}>
+          <div style={styles1.modalBody}>                                     
             <h1>Заполните поля</h1>
             <textarea
             style={styles3.textarea}
