@@ -16,9 +16,9 @@
 Третий раздел - статистика. График сделок, а также график продаж по месяцам.
 Кнопка new позволяет создать новую сделку.
 
-![Alt text](public/images/statistics.png?raw=true "statistics")
+![Alt text](frontend/public/images/statistics.png?raw=true "statistics")
 
 Четвертый раздел - заметки. Колонки можно менять местами с помощью функции drag-and-drop. Заметки можно переносить из одной колонки в другую.
 Кнопка new task позволит создать новую заметку, которая по умолчанию попадет в первую колонку, после чего ее также можно перемещать.
 
-![Alt text](public/images/notes.png?raw=true "notes")
+![Alt text](frontend/public/images/notes.png?raw=true "notes")
