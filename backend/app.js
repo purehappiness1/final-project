@@ -119,9 +119,13 @@ function authenticationMiddleware() {
   };
 }
 
-app.get("/", authenticationMiddleware(), function (req, res) {
-  res.render("index");
-});
+// app.get("/", authenticationMiddleware(), function (req, res) {
+//   res.render("index");
+// });
+
+app.get("*", (req, res) => {
+res.sendFile(path.resolve('../frontend/build/index.html'))
+})
 
 app.post("/signup", function (req, res, next) {
   console.log(req.body);
