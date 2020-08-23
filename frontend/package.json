@@ -33,6 +33,7 @@
     "redux-devtools-extension": "^2.13.8",
     "styled-components": "^5.1.1"
   },
+  "proxy": "http://localhost:3100/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -53,5 +54,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
