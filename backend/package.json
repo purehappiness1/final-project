@@ -19,8 +19,5 @@
     "passport-local": "^1.0.0",
     "passport-session": "^1.0.2",
     "sha256": "^0.2.0"
-  },
-  "engines": {
-    "node": "14.x"
   }
 }
