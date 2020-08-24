@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/purehappiness1/final-project/issues"
   },
-  "homepage": "https://github.com/purehappiness1/final-project#readme"
+  "homepage": "https://github.com/purehappiness1/final-project#readme",
+  "engines": {
+    "node": "14.x"
+  }
 }
